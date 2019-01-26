@@ -1,0 +1,243 @@
+/* Track */
+ ::-webkit-scrollbar-track {
+    background:rgba(255,255,255,1);
+}
+
+ .sideImageGallery::-moz-scrollbar-track {
+    background:rgba(255,255,255,1);
+}
+::-webkit-scrollbar {
+display: none;
+}
+::-moz-scrollbar {
+display: none;
+}
+html{
+
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+.takePicOverlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+
+    width: 100%;
+    height:100%;
+    position: fixed; /* Stay in place */
+    z-index: 100000; /* Sit on top */
+    background-color: rgba(0,0,0,1); /* Black fallback color */
+    max-height:100%;
+      -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+     overflow:hidden;
+     top:0;
+     left:0;
+
+}
+
+.videoContainer{
+	 position:absolute;
+     text-align: center; /* Centered text/links */
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     display:inline-block !important;
+	float:left !important;
+	left:15%;
+	top:5%;
+	right:15%;
+	bottom:15%;
+	margin-right:auto;
+	width:70%;
+	height:80%;
+	margin-top:10%;
+	max-width:90%;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+#videoStream{
+	max-width:71.5%;
+	max-height:80%;
+	   -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+
+      margin-top:aut0;
+      margin-left:auto;
+      margin-right:auto;
+      margin-bottom:auto;
+      display:block;
+
+}
+
+.sideImageGallery{
+
+  width:7% !important;
+	height:99.9% !important;
+	margin-top:0.1%;
+	display:inline-block !important;
+	float:left;
+	overflow:auto!important;
+	backgound-color:rgba(0,0,0,1)!important;
+-webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+   transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+	padding-top:auto;
+	padding-bottom:auto;
+  float:right;
+
+}
+
+.sideImageGallery img{
+z-index: 100005; /* Sit on top */
+	border: 1.5px solid rgba(255,255,255,1);
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%;
+    display:block;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size:contain !important;
+    cursor:pointer !important;
+    background-color:rgba(0,0,0,0.3)!important;
+    -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+   transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  margin-bottom:4px;
+  -webkit-animation: imageAppendAnim  0.5s ease-in-out;
+     animation:   imageAppendAnim  0.5s  ease-in-out;
+}
+
+#grabFrameCanvas,
+#imageCaptureCanvas{
+width:20%;
+height:20%;
+float:right;
+border:1px solid rgba(255,255,255,0.5);
+}
+#takePicButton{
+	text-decoration:none !important;
+	 text-shadow: 2px 2px rgba(0,0,0.,0.6);
+	 margin-left:20%;
+}
+#takePicButton::before{
+	 font-family:dashicons;
+	content: "\f235";
+	font-size:40px;
+	 -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+	 text-decoration:none !important;
+}
+#takePicButton:hover:before{
+		color:rgba(25, 181, 254, 0.7);
+    	 text-decoration:none !important;
+      -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+     
+}
+#viewUploadedImages{
+	text-decoration:none !important;
+	 text-shadow: 2px 2px rgba(0,0,0.,0.6);
+	 margin-left:35%;
+}
+
+#viewUploadedImages::before{
+	 font-family:dashicons;
+	content: "\f161";
+	font-size:40px;
+	 -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+	 text-decoration:none !important;
+}
+#viewUploadedImages:hover:before{
+		color:rgba(25, 181, 254, 0.7);
+    	 text-decoration:none !important;
+      -webkit-transition: height 3s ; /* Safari */
+       transition:  height 3s;
+       transition: 0.8s ease;
+      -webkit-transition: 0.8s ease;
+      -moz-transition: 0.8s ease;
+      -ms-transition: 0.8s ease;
+}
+
+#takePicClose{
+
+	
+	margin-top:-25px !important;
+	margin-left:0px;
+}
+#takePicClose:hover:before{
+     background-color:rgba(255,255,255,0.6);
+       text-shadow: 2px 2px rgba(0,0,0,0.8);
+       font-weight:bold;
+       
+}
+
+#takePicClose::before{
+	content:"\00d7";
+	font-size:45px;
+	cursor:pointer;
+	color:rgba(255,255,255,1);
+		padding:5px;
+	padding-bottom:0px;
+	border-right: 3px solid rgba(255,255,255,1);
+    border-bottom: 3px solid rgba(255,255,255,1);
+    border-radius: 0% 0% 70% 0%;
+
+}
+
+/*animation for wait while content is being loaded*/
+@-webkit-keyframes imageAppendAnim{
+  from {
+
+      width: 0%;
+      height:0%;
+  }
+from{
+
+}
+
+
+}
+
+@keyframes imageAppendAnim{
+
+  from {
+    width: 0%;
+    height:0%;
+
+     }
+
+to {
+
+
+
+}
+
+
+}
