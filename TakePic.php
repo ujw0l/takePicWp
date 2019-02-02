@@ -4,7 +4,7 @@
 Plugin Name: Take Pic
 Plugin URI:
 Description: WordPress plugin which enables user to take picture with their webcam and upload to the site
-Version: 1.0.0
+Version: 1.1.0
 Author: Ujwol Bastakoti
 Author URI:https://ujwolbastakoti.wordpress.com/
 License: GPLv2
@@ -102,9 +102,12 @@ class takePicWidget extends WP_Widget{
 				echo $before_title . $title . $after_title;
 			?>
               <div id="takePicWidget">
+              <?php if(is_user_logged_in()):?>
               		<a id="takePicButton" href="JavaScript:void(0);" title="Take picture with camera and upload" onclick="new takePic();"> </a>
-              		<?php if(is_user_logged_in()):?>
+              		
               		<a id="viewUploadedImages" href="JavaScript:void(0);" title="View all uploaded images" onclick="takePic.viewUploadedImages();"> </a>
+              		<?php else:?>
+              			<a id="takePicButton" class="takePicIconNotLogged" href="JavaScript:void(0);" title="Take picture with camera and upload" onclick="new takePic();"> </a>
               		<?php endif;?>
               </div>
 
@@ -296,8 +299,10 @@ class takePicPlugin{
        
         $uploadDir = wp_upload_dir();
         $userDir = $uploadDir['basedir'].'/'. $_POST['userlogin'];
+        $old = umask(0);
         chmod($uploadDir['basedir'], 0777);
-       
+        umask($old);
+        
         if(rmdir($userDir)):
             
             echo "deleted";

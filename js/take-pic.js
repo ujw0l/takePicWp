@@ -5,7 +5,7 @@
  */
 
 
-//console.log(import ctcOverlayViewer from 'ctc_overlay');
+
 class takePic{
 
 	constructor(){
@@ -17,11 +17,14 @@ class takePic{
 		else{
 				this.webCamOverlayHtml();
 				this.accessCamera();
-				document.getElementById("videoStream").addEventListener("click",this.takeSnapshot);
-		
-			   window.addEventListener("resize",this.resizeSnapShot);
+				document.getElementById("captureButton").addEventListener("click",this.takeSnapshot);
+			
+			    window.addEventListener("resize",this.resizeSnapShot);
+			   
 		}
 	}
+	
+
 
 	//function to add video camera in overlay
 	webCamOverlayHtml(){
@@ -37,12 +40,11 @@ class takePic{
 				ctcOverlayViewer.setElemAttr([["onmouseover","new ctcOverlayViewer(this);"],["title","Click to enlarge image"]],sideGallery);
 		    	overlayDiv.appendChild(sideGallery);
 	
-		     		
+		
 				
 		    	//video container
 		    	let videoContainer = document.createElement('div');
 				videoContainer.id = "videoContainer";
-				videoContainer.setAttribute("title","Click anywhere in video to take picture");
 				videoContainer.className = "videoContainer";
 				overlayDiv.appendChild(videoContainer);
 				
@@ -54,14 +56,74 @@ class takePic{
 		    	closeButton.setAttribute("onclick", "takePic.closeCameraView();");
 		    	closeButton.className = "takePicClose";
 		    	overlayDiv.appendChild(closeButton);
+		    	
+		    	
+		    	//create element for take take snap shot
+				  let captureButton = document.createElement('div');
+				  	  captureButton.id ="captureButton";
+				  	  captureButton.setAttribute("title","Take Picture");
+				  	overlayDiv.appendChild(captureButton);
 				
 		    	
 
 				//video element
 				let videoStream = document.createElement('video');
 					videoStream.id = "videoStream";
+					videoStream.setAttribute("data-filter","cssFilterNone")
 					videoStream.setAttribute("autoPlay","true");
 					videoContainer.appendChild(videoStream);
+				
+				//filter container
+				var filterContainer = document.createElement('div');
+					filterContainer.id = "takePicFilterContainer";
+				 let filterTitle = document.createElement('h2');
+				 	 filterTitle.innerHTML ="Image Filters"; 
+				 	 filterContainer.appendChild(filterTitle);
+				 var filterUl = document.createElement('ul');	 
+				 
+				 	 //element for no filter radio button
+				 	let filter = document.createElement("INPUT");
+		  			filter.setAttribute("type", "radio");
+		  			filter.setAttribute("name", "takePicFilter");
+		  			filter.setAttribute("id", "takePicFilterNone");
+		  			filter.setAttribute("onclick", "takePic.applyFilter('cssFilterNone');");
+		  			filter.setAttribute("checked","checked");
+		  			
+		  			
+	  		        	
+		  		   
+		  		    
+		  		  
+	  		       let filterLi = document.createElement('li');
+	  		       	   filterLi.innerHTML = " None";
+	  		       	   filterLi.appendChild(filter);
+	  		   
+		  		       
+	  		       	filterUl.appendChild(filterLi);
+		  		  
+				 //radio button for different filter	 	
+		  		takePic.getFilterArrayObj('prop').map(
+						(x)=>{
+											let filterLi = document.createElement('li');
+											let filter = document.createElement("INPUT");
+								  			filter.setAttribute("type", "radio");
+								  			filter.setAttribute("name", "takePicFilter");
+								  			filter.setAttribute("id", "takePicFilter"+x);
+								  			filter.setAttribute("onclick", "takePic.applyFilter('cssFilter"+x+"');");
+								  			
+								  		 
+								  		   
+								  		  filterLi.innerHTML = " "+x;   
+								  		  filterLi.appendChild(filter);
+								  		  filterUl.appendChild(filterLi);
+			
+						});    
+				 
+				
+		  		filterContainer.appendChild(filterUl);
+				videoContainer.appendChild(filterContainer);
+				 
+				
 
 
 					//create canvas to buffer captured image
@@ -97,6 +159,9 @@ class takePic{
 	//funcition to take image
 	 takeSnapshot(){
 
+		 
+		 
+		 
 		 let hidden_canvas = document.getElementById('imageCaptureCanvas');
 		 let sideGallery = document.getElementById('sideImageGallery');
 		 let video = document.getElementById('videoStream');
@@ -111,9 +176,15 @@ class takePic{
 
 		 // Context object for working with the canvas.
 		 let context = hidden_canvas.getContext('2d');
+		 let newFilter = takePic.getFilterArrayObj(document.getElementById("videoStream").getAttribute("data-filter")).replace(/;/g,"").replace(/-webkit-filter/g,"").replace(/filter/g,"").replace(/:/g,' ');
 		 
+		
+	
      // Draw a copy of the current frame from the video on the canvas.
-     context.drawImage(video, 0, 0, width,height);
+		 context.filter = newFilter;
+		 context.drawImage(video, 0, 0, width,height);
+     
+
 
      // Get an image dataURL from the canvas.
      var imageDataURL = hidden_canvas.toDataURL('image/png');
@@ -406,10 +477,47 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 		 }
 		 
 		
-		 	
-		
 	} 	
 
+	//css to apply filter to video
+	static applyFilter(filter){
+		
+		
+		let video = document.getElementById("videoStream");
+		
+			video.style.cssText= takePic.getFilterArrayObj(filter);
+			video.setAttribute("data-filter",filter)
+
+	}
+	
+	//function to set radio button css properties
+	static getFilterArrayObj(param){
+		 
+		
+		 if(param === "prop"){
+					 
+			return ["Invert","Staurate","GrayScale","Sepia","Contrast","Blur","Hue","Tint","Inkwell"];
+		 }
+		 else{
+			 
+			if(param !== undefined){
+				 return {
+				 cssFilterNone:'filter:none;-webkit-filter:none;',
+				 cssFilterContrast:"-webkit-filter: contrast(3); filter: contrast(3)",
+				 cssFilterSepia:"-webkit-filter: sepia(1); filter: sepia(1);",
+				 cssFilterGrayScale:"-webkit-filter: grayscale(1); filter: grayscale(1);",
+				 cssFilterStaurate:"-webkit-filter: saturate(4); filter: saturate(4);",
+		         cssFilterInvert:"-webkit-filter: invert(.8); filter: invert(.8);",
+		         cssFilterBlur :"filter:blur(5px); -webkit-filter:blur(5px);",
+		         cssFilterHue :"filter: -webkit-filter: hue-rotate(90deg); filter: hue-rotate(90deg);",
+		         cssFilterTint : "-webkit-filter: sepia(1) hue-rotate(200deg);filter: sepia(1) hue-rotate(200deg);",
+		         cssFilterInkwell: "-webkit-filter: grayscale(1) brightness(0.45) contrast(1.05);filter: grayscale(1) brightness(0.45) contrast(1.05);"
+		        	 }[param];		
+			}
+		 }
+		 
+		 
+	 }
 
 }
 

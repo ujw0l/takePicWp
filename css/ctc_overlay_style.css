@@ -322,6 +322,10 @@ div.ctcOverlayCountAndCurrentImageV{
 	text-decoration:none !important;
 }
 
+.takePicIconNotLogged{
+	
+	margin-left:45% !important;
+}
 
 
 /*style for overlay image gallery on left*/
@@ -500,3 +504,7 @@ div.ctcOverlayCountAndCurrentImageV{
 
 
 }
+
+
+
+
