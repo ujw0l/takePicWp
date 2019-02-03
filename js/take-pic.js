@@ -176,7 +176,7 @@ class takePic{
 
 		 // Context object for working with the canvas.
 		 let context = hidden_canvas.getContext('2d');
-		 let newFilter = takePic.getFilterArrayObj(document.getElementById("videoStream").getAttribute("data-filter")).replace(/;/g,"").replace(/-webkit-filter/g,"").replace(/filter/g,"").replace(/:/g,' ');
+		 let newFilter = takePic.sanitizeFilter(takePic.getFilterArrayObj(document.getElementById("videoStream").getAttribute("data-filter")));
 		 
 		
 	
@@ -502,7 +502,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 			 
 			if(param !== undefined){
 				 return {
-				 cssFilterNone:'filter:none;-webkit-filter:none;',
+				 cssFilterNone:'filter:none; -webkit-filter:none;',
 				 cssFilterContrast:"-webkit-filter: contrast(3); filter: contrast(3)",
 				 cssFilterSepia:"-webkit-filter: sepia(1); filter: sepia(1);",
 				 cssFilterGrayScale:"-webkit-filter: grayscale(1); filter: grayscale(1);",
@@ -510,14 +510,38 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 		         cssFilterInvert:"-webkit-filter: invert(.8); filter: invert(.8);",
 		         cssFilterBlur :"filter:blur(5px); -webkit-filter:blur(5px);",
 		         cssFilterHue :"filter: -webkit-filter: hue-rotate(90deg); filter: hue-rotate(90deg);",
-		         cssFilterTint : "-webkit-filter: sepia(1) hue-rotate(200deg);filter: sepia(1) hue-rotate(200deg);",
-		         cssFilterInkwell: "-webkit-filter: grayscale(1) brightness(0.45) contrast(1.05);filter: grayscale(1) brightness(0.45) contrast(1.05);"
+		         cssFilterTint : "-webkit-filter: sepia(1) hue-rotate(200deg); filter: sepia(1) hue-rotate(200deg);",
+		         cssFilterInkwell: "-webkit-filter: grayscale(1) brightness(0.45) contrast(1.05); filter: grayscale(1) brightness(0.45) contrast(1.05);"
 		        	 }[param];		
 			}
 		 }
 		 
 		 
 	 }
+	
+	//funtion to sanitize css filter
+	static sanitizeFilter(filter){
+		
+		let cleanFilter ='';
+		let filterArray = filter.replace(/;/g,"").replace(/-webkit-filter/g,"").replace(/filter/g,"").replace(/:/g,'').split(" ")
+		 
+		
+		 
+		for (var i = 0; i < (filterArray.length/2); i++) { 
+			  
+				 if(filterArray[i].length > 1){
+					 
+					 cleanFilter += filterArray[i]+" ";
+					 
+				 }
+					
+					
+			}
+		
+		
+		return cleanFilter;
+		
+	}
 
 }
 

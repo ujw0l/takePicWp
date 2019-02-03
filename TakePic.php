@@ -210,7 +210,7 @@ class takePicPlugin{
         		         if(file_exists($userDirname)):    
         		              
         			     ?>
-        			     <div id="takePicUpload-<?=$userObj->user_login?>" class='updated js-update-details' style='width:40%;height:30px;padding-top:10px;' >
+        			     <div id="takePicUpload-<?=$userObj->user_login?>" class='plugin-notice notice notice-info notice-alt' style='width:40%;height:30px;padding-top:10px;' >
         			     <span><b><?=$userObj->user_login?> :- <i> Upload size : <?=floor(filesize($userDirname))/1000?> mb</i></b><span>
         			    
         			     <span style="float:right; margin-right:1%">
