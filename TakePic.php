@@ -3,8 +3,8 @@
 
 Plugin Name: Take Pic
 Plugin URI:
-Description: WordPress plugin which enables user to take picture with their webcam and upload to the site
-Version: 1.1.0
+Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
+Version: 1.1.2
 Author: Ujwol Bastakoti
 Author URI:https://ujwolbastakoti.wordpress.com/
 License: GPLv2
@@ -22,8 +22,7 @@ class takePicWidget extends WP_Widget{
 			);
 			
 			add_action( 'wp_enqueue_scripts', array($this, 'load_dashicons_front_end') );
-			
-            
+
 			//hook to  register widget
 			add_action( 'widgets_init', array($this,'register_takePicWidget') );
 			
@@ -198,20 +197,34 @@ class takePicPlugin{
         <div class="takePicAdminPanel">
 
         			<h1 class="dashicons-before dashicons-video-alt2">Take Pic</h1>
-        			<p><b>Users with Image upload</b></p>
+        			<p><b>Users with Image uploads and size</b></p>
         			
         		<ul>
         		
         		<?php 
         		     array_map(function($userObj){
+        		         $user = get_user_by('login', $userObj->user_login);
+        		         
+        		       
+        		       
+        		         if( !empty($user->first_name) && !empty($user->last_name)){
+        		             $name = $user->first_name." ".$user->last_name;  
+        		         }else{
+        		             
+        		             $name = $userObj->user_login;
+        		         }
+        		       
+        		         
         		         $uploadDir = wp_upload_dir();
         		         $userDirname = $uploadDir['basedir']. '/' . $userObj->user_login;
         		              
         		         if(file_exists($userDirname)):    
         		              
         			     ?>
-        			     <div id="takePicUpload-<?=$userObj->user_login?>" class='plugin-notice notice notice-info notice-alt' style='width:40%;height:30px;padding-top:10px;' >
-        			     <span><b><?=$userObj->user_login?> :- <i> Upload size : <?=floor(filesize($userDirname))/1000?> mb</i></b><span>
+        			     <div id="takePicUpload-<?=$userObj->user_login?>" class='plugin-notice notice notice-info notice-alt'  
+        			     onMouseOver="this.style.boxShadow='2px 2px 3px lightblue'"
+   						onMouseOut="this.style.boxShadow=''" style='width:40%;height:30px;padding-top:10px;' >
+        			     <span><b><?=$name.'<i> ('.$userObj->user_login.')</i>'?> :- <i> Upload size : <?=floor(filesize($userDirname))/1000?> mb</i></b><span>
         			    
         			     <span style="float:right; margin-right:1%">
         			     	<a title="Delete images uploaded by user"
@@ -394,8 +407,7 @@ class takePicPlugin{
             echo "delete fail";
         
         endif;
-            
-       
+
         wp_die();
     }
     
