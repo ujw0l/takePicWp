@@ -73,6 +73,10 @@ class takePic{
 					videoStream.setAttribute("autoPlay","true");
 					videoContainer.appendChild(videoStream);
 				
+					
+		  if(navigator.userAgent.indexOf('Chrome') > -1 || navigator.userAgent.indexOf('Firefox') > -1){
+			  
+			
 				//filter container
 				var filterContainer = document.createElement('div');
 					filterContainer.id = "takePicFilterContainer";
@@ -105,8 +109,8 @@ class takePic{
 						});    
 				
 		  		
-				videoContainer.appendChild(filterContainer);
-				 
+		  		videoContainer.insertBefore(filterContainer, videoContainer.firstChild);
+		  }
 				
 
 
@@ -496,32 +500,34 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	
 	//function to set radio button css properties
 	static getFilterArrayObj(param){
-		 
-		
+
+
 		 if(param === "prop"){
-					 
-			return ['None',"Invert","Staurate","GrayScale","Sepia","Contrast","Hue","Tint","UjW0L"];
+
+			return ['None','Multiple','invertMultiple',"Invert","GrayScale","Sepia","Contrast","Hue","Tint","UjW0L"];
 		 }
 		 else{
-			 
+
 			if(param !== undefined){
-				
+
 				 return {
 				 cssFilterNone:'filter:none; -webkit-filter:none;',
+				 cssFilterMultiple :' -webkit-filter: saturate(1.5) contrast(1.5) hue-rotate(-15deg); filter:saturate(1.5) contrast(1.5) hue-rotate(-15deg);',
+				 cssFilterinvertMultiple : '-webkit-filter: brightness(0.7) saturate(150%) contrast(190%) hue-rotate(30deg); filter: brightness(0.7) saturate(150%) contrast(190%) hue-rotate(30deg);',
 				 cssFilterContrast:"-webkit-filter: contrast(3) ; filter: contrast(3);",
 				 cssFilterSepia:"-webkit-filter: sepia(1); filter: sepia(1);",
 				 cssFilterGrayScale:"-webkit-filter: grayscale(1); filter: grayscale(1);",
-				 cssFilterStaurate:"-webkit-filter: saturate(4) sepia(.4) grayscale(0.2); filter: saturate(4) sepia(.4) grayscale(0.2);",
 		         cssFilterInvert:"-webkit-filter: invert(2.5); filter: invert(2.5);",
 		         cssFilterHue :"filter: -webkit-filter: hue-rotate(175deg); filter: hue-rotate(175deg);",
 		         cssFilterTint : "-webkit-filter: sepia(1) hue-rotate(200deg); filter: sepia(1) hue-rotate(200deg);",
 		         cssFilterUjW0L: "-webkit-filter: contrast(1.4) saturate(1.8) sepia(.6); filter: contrast(1.4) saturate(1.8) sepia(.6);"
-		        	 }[param];		
+		        	 }[param];
 			}
 		 }
-		 
-		 
+
+
 	 }
+	
 	
 	//funtion to sanitize css filter
 	static sanitizeFilter(filter){

@@ -4,7 +4,7 @@
 Plugin Name: Take Pic
 Plugin URI:
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 1.1.2
+Version: 1.1.3
 Author: Ujwol Bastakoti
 Author URI:https://ujwolbastakoti.wordpress.com/
 License: GPLv2

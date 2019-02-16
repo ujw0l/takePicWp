@@ -2,9 +2,9 @@
 Contributors: ujw0l
 Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.0
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, 
