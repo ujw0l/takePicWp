@@ -110,6 +110,15 @@ class takePic{
 				
 		  		
 		  		videoContainer.insertBefore(filterContainer, videoContainer.firstChild);
+		  		
+		  	  //create canvas to buffer captured image
+				let imageCanvas = 	document.createElement('canvas');
+					imageCanvas.id = "imageCaptureCanvas";
+					imageCanvas.style.display="none"
+					overlayDiv.appendChild(imageCanvas);
+
+
+	document.getElementById("captureButton").addEventListener("click",this.takeSnapshot);
 		  }
 				
 
@@ -124,37 +133,113 @@ class takePic{
 
 
 	//function to stream video
-	accessCamera(){
+	 accessCamera(){
 
+
+		
 		var video = document.getElementById("videoStream");
 		var imageCapture;
 
-		if (navigator.mediaDevices.getUserMedia) {
-		    navigator.mediaDevices.getUserMedia({video: true})
+		if(navigator.mediaDevices.getUserMedia){
+
+		    navigator.mediaDevices.getUserMedia({video : true})
 		  .then((mediaStream) => {
+
 			  document.getElementById('videoStream').srcObject = mediaStream;
 			  ctcOverlayViewer.objectToArray(document.getElementsByClassName('filterVideoStream')).map((x)=>{
-				 
-					  x.srcObject = mediaStream;  
-				 
-				 
+					  x.srcObject = mediaStream;
 			  });
-			  
-			  setTimeout(function(){ 
+
+			  setTimeout(function(){
 				  document.getElementById('filterHeader').style.display = 'block';
-			  
-			  						}, 200);
-			  
+					document.getElementById("captureButton").style.opacity ='1';
+
+					if(document.getElementById("changeCamButton") !== 'undefined'){
+						document.getElementById("changeCamButton").style.opacity='1';
+
+					}
+					
+
+			  }, 200);
+
 			  const track = mediaStream.getVideoTracks()[0];
 			       imageCapture = new ImageCapture(track);
 		  })
 		  .catch((error) =>{
 		    console.log(error);
 		  });
+
+
+		 
+		 //enumerate all cameras
+		    navigator.mediaDevices.enumerateDevices().then( (devices) => {
+		         let i=0;
+				  devices.map((device)=>{
+					  if(device.kind == 'videoinput'){
+						  if(i >=1){
+							//create element for take take snap shot
+							  let changeCam = document.createElement('div');
+							  	  changeCam.id ="changeCamButton";
+							  	  changeCam.setAttribute('data-cam','1');
+							  	  changeCam.setAttribute('onclick','takePic.changeCam("'+device.deviceId+'");');
+							  	  changeCam.setAttribute("title","User other Camera");
+							  	  document.getElementById("takePicOverlay").appendChild(changeCam);
+
+						  }
+						i++;
+
+					  }
+
+
+				  });
+			 });
+
+		}
+	}
+	 
+	 
+	//function to change camera
+		static changeCam(camId){
+
+			navigator.mediaDevices.enumerateDevices().then( (devices) => {
+
+					navigator.mediaDevices.getUserMedia({video:{deviceId: camId}})
+								.then((mediaStream) => {
+
+									document.getElementById('videoStream').srcObject = mediaStream;
+									ctcOverlayViewer.objectToArray(document.getElementsByClassName('filterVideoStream')).map((x)=>{
+											x.srcObject = mediaStream;
+									});
+
+									setTimeout(function(){
+										document.getElementById('filterHeader').style.display = 'block';
+										document.getElementById("captureButton").style.opacity ='1';
+
+									}, 200);
+
+									const track = mediaStream.getVideoTracks()[0];
+											imageCapture = new ImageCapture(track);
+								})
+								.catch((error) =>{
+									console.log(error);
+								});
+						
+						
+							devices.map((device)=>{
+								if(device.kind === 'videoinput'){
+									
+								if(device.deviceId != camId){
+					
+									document.getElementById("changeCamButton").setAttribute('onclick','takePic.changeCam("'+device.deviceId+'");');
+									}
+									
+								}	  
+							});
+						
+			 });
+			
 		}
 
-		
-	}
 
 	//function to take image
 	 takeSnapshot(){
