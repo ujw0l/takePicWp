@@ -1,10 +1,10 @@
 === Take Pic ===
 Contributors: ujw0l
-Tags: webcam, image upload,  webcam widget
+Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.0
-Stable tag: 1.1.0
+Stable tag: 1.1.3
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, 
@@ -14,7 +14,7 @@ Plugin which enables user to take picture with their webcam and upload to the se
 This plugin enables user to take picture with web cam and save it to your server, which they will also be able to view , delete old images as well as  upload new image ones as they wish.
 Ideal for social networking or image uploading sites.
 
-Plugin also lets you apply diffrent predefined CSS filter to the images while taking snaphot and upload it with filter.
+Plugin also lets you apply diffrent predefined image effects to the images while giving them ability to snaphot and upload it with filter.
 
 
 
@@ -62,11 +62,11 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 == Screenshots ==
 
 1.	Widget webcam and gallery links 
-2.	Camera view
+2.	Camera view with effects applied
 3.	All of the images users have uploded in CTC overlay gallery viewer 
 4.	Admin panel view of plugin
-5.      Active widget view on backend
-6.      Camera view with filter applied
+5.  Active widget view on backend
+
 
 == Changelog ==
 
