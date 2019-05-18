@@ -9,18 +9,19 @@
 class takePic{
 
 	constructor(){
-		if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)){
-			
-			alert("Mobile devices do not support this feature yet");
-			
+
+		if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)){			
+			alert(takePicMessage.mobile_browser);
 			}
 		else{
+			if('undefined' !== typeof(navigator.mediaDevices)){
 				this.webCamOverlayHtml();
 				this.accessCamera();
 				document.getElementById("captureButton").addEventListener("click",this.takeSnapshot);
-			
-			    window.addEventListener("resize",this.resizeSnapShot);
-			   
+				window.addEventListener("resize",this.resizeSnapShot); 
+			} else {
+					alert(takePicMessage.no_ssl);
+				} 
 		}
 	}
 	
@@ -140,6 +141,7 @@ class takePic{
 		var video = document.getElementById("videoStream");
 		var imageCapture;
 
+		
 		if(navigator.mediaDevices.getUserMedia){
 
 		    navigator.mediaDevices.getUserMedia({video : true})
@@ -342,7 +344,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	    
 	    xhttp.onerror = function() {
 	    	
-	        alert("connection error");
+	        alert(takePicMessage.connection_error);
 	    };
 		
 		
@@ -354,7 +356,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	//function to upload imge to server
 	static deleteImage(fileName,imageNum){
 	
-	if(confirm("Are you sure you want to delete this image?")){	
+	if(confirm(takePicMessage.delete_confirm)){	
 		
 		var xhttp =  new XMLHttpRequest();
 		xhttp.open("POST", my_ajax_url, true);
@@ -367,7 +369,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	        	
 	        	if(this.response === 'deleted'){
 	        		
-	        		alert("Image sucessfully deleted");
+	        		alert(takePicMessage.delete_success);
 	        		
 	        		takePic.removeDeletedImage(imageNum);
 	        		
@@ -379,12 +381,9 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	        			
 	        			setTimeout(ctcOverlayViewer.loadOverlayImages(imageNum),100);
 	        		}
-	        		
 	        	}
 	        	else{
-	        		
-	        		
-	        		alert("Can't delete at this time");
+	        		alert(takePicMessage.delete_failed);
 	        	}
 	            
 	        } else {
@@ -395,7 +394,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	    
 	    xhttp.onerror = function() {
 	    	
-	        alert("connection error");
+	        alert(takePicMessage.connection_error);
 	    };
 				
 		xhttp.send("action=ajaxDeleteImage&image="+fileName);
@@ -406,7 +405,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	//function to upload imge to server
 	static updateProfilePic(fileName){
 		
-		alert(fileName+' will be profile pic');
+		alert(fileName+' '+takePicMessage.profile_pic);
 		var xhttp =  new XMLHttpRequest();
 		xhttp.open("POST", my_ajax_url, true);
 		xhttp.responseType = "text";
@@ -424,7 +423,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	    
 	    xhttp.onerror = function() {
 	    	
-	        alert("connection error");
+	        alert(takePicMessage.connection_error);
 	    };
 		
 		xhttp.send("action=ajaxUpdateProfilePic&image="+fileName);
@@ -447,7 +446,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	         if(this.response.length === 1){
 	        	 
 	        	 
-	        	 alert("You do not have any image to display");
+	        	 alert(takePicMessage.no_image);
 	        
 	          }
 	         else{
@@ -472,7 +471,7 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 	    
 	    xhttp.onerror = function() {
 	    	
-	        alert("connection error");
+	        alert(takePicMessage.connection_error);
 	    };
 		
 		xhttp.send("action=ajaxGetUploadedImages");
@@ -566,8 +565,6 @@ ctcOverlayViewer.applyStyle([["height",sideGalImgWidth]],
 
 	//css to apply filter to video
 	static applyFilter(filter){
-		
-		
 		
 		let video = document.getElementById("videoStream");
 		    
