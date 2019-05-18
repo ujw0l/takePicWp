@@ -1,14 +1,13 @@
 <?php
 /*
-
 Plugin Name: Take Pic
-Plugin URI:
+Plugin URI: https://ujw0l.github.io/take-pic-js/
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 1.1.3
+Version: 1.2.1
 Author: Ujwol Bastakoti
+text-domain : take-pic
 Author URI:https://ujwolbastakoti.wordpress.com/
 License: GPLv2
-
 */
 
 
@@ -90,6 +89,18 @@ class takePicWidget extends WP_Widget{
         wp_enqueue_script('ctcOverlayJs', plugins_url('js/ctc_overlay.js',__FILE__ ));
         wp_enqueue_script('takePicJs', plugins_url('js/take-pic.js',__FILE__ ));
         wp_localize_script( 'takePicJs', 'my_ajax_url', admin_url( 'admin-ajax.php' ) );
+        wp_localize_script( 'takePicJs', 'takePicMessage', array(
+                                                                'mobile_browser' => __("Mobile devices do not support this feature yet",'take-pic'),
+                                                                'no_ssl' => __("You browser doesn't  support webcam feature.",'take-pic'),
+                                                                'connection_error' => __("Connection error.",'take-pic'),
+                                                                'delete_confirm' => __("Are you sure you want to delete this image?",'take-pic'),
+                                                                'delete_success' => __("Image sucessfully deleted.",'take-pic'),
+                                                                'delete_failed' => __("Could't delete image at this time.",'take-pic'),
+                                                                'profile_pic' => __("will be profile pic.",'take-pic'),
+                                                                'no_image' => __("You do not have any image to display.",'take-pic'),
+
+
+        ) );
         
 
 			extract( $args );
@@ -275,7 +286,6 @@ class takePicPlugin{
 			        		alert("Uploads sucessfully deleted");
 
 			        		var rowDelete = document.getElementById("takePicUpload-"+userLogin);
-
 			        		rowDelete.parentNode.removeChild(rowDelete);
 			
 			        	}
@@ -318,10 +328,10 @@ class takePicPlugin{
         
         if(rmdir($userDir)):
             
-            echo "deleted";
+            echo deleted;
         else:
         
-            echo "not deleted";
+            echo __("Not deleted.",'take-pic');
         
         endif;
  
@@ -346,28 +356,28 @@ class takePicPlugin{
            
                       if(wp_mkdir_p($userDirname)):
                            if($this->base64ToPngSave($_POST['image'],$userDirname)):
-                                echo "Image sucessfully uploaded";
+                                echo __("Image sucessfully uploaded",'take-pic');
                            else:
-                              echo "Image couldn't be uploaded at this time";
+                              echo __("Image couldn't be uploaded at this time",'take-pic');
                            endif;
                          else:
-                             echo "Image couldn't be uploaded at this time";
+                             echo __("Image couldn't be uploaded at this time",'take-pic');
                          endif;
            else:
               
                    if($this->base64ToPngSave($_POST['image'],$userDirname)):
-                        echo "Image sucessfully uploaded";
+                        echo __("Image sucessfully uploaded",'take-pic');
                    else:
                    
                    var_dump($this->base64ToPngSave($_POST['image'],$userDirname));
-                        echo "Couldn't upload image, try again later";
+                        echo __("Couldn't upload image, try again later",'take-pic');
                    endif;
               
            endif;
       
       else:
       
-            echo "You need to login to upload image";
+            echo __("You need to login to upload image",'take-pic');
       endif;
       
         wp_die();
@@ -403,9 +413,7 @@ class takePicPlugin{
          echo "deleted";   
         
         else:
-   
-            echo "delete fail";
-        
+            echo __("Delete failed.",'take-pic');
         endif;
 
         wp_die();
@@ -433,7 +441,5 @@ class takePicPlugin{
     }
     
 }
-
-
 new takePicPlugin();
 new takePicWidget();

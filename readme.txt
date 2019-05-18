@@ -2,9 +2,9 @@
 Contributors: ujw0l
 Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
-Tested up to: 5.0
+Tested up to: 5.2.1
 Requires PHP: 5.0
-Stable tag: 1.1.3
+Stable tag: 1.2.1
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, 
@@ -19,7 +19,7 @@ Plugin also lets you apply diffrent predefined image effects to the images while
 
 
 
-Note: 
+Note: Plugin works only on secured server (only under https:// not http://) 
     
 
 == Installation ==
@@ -77,6 +77,16 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 * Seperate button to capture Image
 * User can choose pre-dfined CSS filter and apply to the image
 * Better styling 
+
+= 1.2.0 =
+* Multiple camera support if avialable
+*Bug fixes
+*Smaller Icons
+
+= 1.2.0 =
+* Text translation
+* Bug fixes
+
 
 
 
