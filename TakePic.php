@@ -84,10 +84,9 @@ class takePicWidget extends WP_Widget{
 		public function widget( $args, $instance ) {
 		wp_enqueue_style( 'vanillaCtcOverlayCss', plugins_url('css/ctc_overlay_style.css',__FILE__ )); //register css;
 		wp_enqueue_style( 'takePicCss', plugins_url('css/take-pic.css',__FILE__ )); //register css;
-       
-        
         wp_enqueue_script('ctcOverlayJs', plugins_url('js/ctc_overlay.js',__FILE__ ));
         wp_enqueue_script('takePicJs', plugins_url('js/take-pic.js',__FILE__ ));
+        wp_enqueue_script('takePicJs', plugins_url('js/js-crop.js',__FILE__ ));
         wp_localize_script( 'takePicJs', 'my_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_localize_script( 'takePicJs', 'takePicMessage', array(
                                                                 'mobile_browser' => __("Mobile devices do not support this feature yet",'take-pic'),
