@@ -3,7 +3,7 @@
 Plugin Name: Take Pic
 Plugin URI: https://github.com/ujw0l/takePicWp
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 1.2.1
+Version: 2.0.0
 Author: Ujwol Bastakoti
 text-domain : take-pic
 Author URI:http://ujw0l.github.io/
@@ -84,10 +84,9 @@ class takePicWidget extends WP_Widget{
 		public function widget( $args, $instance ) {
 		wp_enqueue_style( 'vanillaCtcOverlayCss', plugins_url('css/ctc_overlay_style.css',__FILE__ )); //register css;
 		wp_enqueue_style( 'takePicCss', plugins_url('css/take-pic.css',__FILE__ )); //register css;
-       
-        
         wp_enqueue_script('ctcOverlayJs', plugins_url('js/ctc_overlay.js',__FILE__ ));
         wp_enqueue_script('takePicJs', plugins_url('js/take-pic.js',__FILE__ ));
+        wp_enqueue_script('takePicJs', plugins_url('js/js-crop.js',__FILE__ ));
         wp_localize_script( 'takePicJs', 'my_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_localize_script( 'takePicJs', 'takePicMessage', array(
                                                                 'mobile_browser' => __("Mobile devices do not support this feature yet",'take-pic'),
@@ -194,7 +193,7 @@ class takePicPlugin{
             'administrator',
             'takePicAdminPanel',
              array($this, 'takePicAdminHtml'),
-            'dashicons-video-alt2',
+            'dashicons-camera-alt            ',
             '10');
  
             endif;
@@ -207,7 +206,7 @@ class takePicPlugin{
         
         <div class="takePicAdminPanel">
 
-        			<h1 class="dashicons-before dashicons-video-alt2">Take Pic</h1>
+        			<h1 class="dashicons-before dashicons-camera-alt">Take Pic</h1>
         			<p><b>Users with Image uploads and size</b></p>
         			
         		<ul>
@@ -255,9 +254,6 @@ class takePicPlugin{
         			?>
         		
         		</ul>	
-        			
-             
-
         </div>
         <?php
         
