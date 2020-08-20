@@ -87,9 +87,11 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 * Text translation
 * Bug fixes
 
-
-
-
+= 2.0.0 =
+* Bug fixes
+* Js Crop added 
+* Image croppable
+* Better UI
 
  
 
