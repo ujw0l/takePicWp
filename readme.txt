@@ -2,7 +2,7 @@
 Contributors: ujw0l
 Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
-Tested up to: 5.2.1
+Tested up to: 5.5
 Requires PHP: 5.0
 Stable tag: 1.2.1
 License: GPLv2
