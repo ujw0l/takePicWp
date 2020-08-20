@@ -473,7 +473,7 @@ class ctcOverlayViewer {
 			optimizedImageHeight = 0,
 			optimizedImageWidth = 0;
 		let imgCount = 2;
-		let imgPercent = undefined != imgCount && 1 < imgCount ? 0.93 : 0.955;
+		let imgPercent = undefined != imgCount && 1 < imgCount ? 0.91 : 0.94;
 		let marginPercent = 1 - imgPercent;
 		if ((imageActualWidth >= screenWidth) && (imageActualHeight >= screenHeight)) {
 			if (imageActualWidth >= imageActualHeight) {
@@ -654,7 +654,7 @@ class ctcOverlayViewer {
 			const sideImgGallery = document.getElementById("ctcOverlayThumbGalleryContainerV");
 			let containerMarginTop = Math.round(screenHeight - optimizedImageHeight) / 2;
 			let navIconMargin = Math.round((optimizedImageHeight - (1.6 * optimizedFontSize)) / 2);
-			let closeMarginTop = Math.round(containerMarginTop - (closeBtn.offsetHeight / 1.2));
+			let closeMarginTop = Math.round(containerMarginTop - (closeBtn.offsetHeight / 1.4));
 			let galleryRightNav = document.getElementById("ctcGalleryRightNavV");
 			let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
 

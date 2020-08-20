@@ -73,7 +73,7 @@ html {
 }
 
 .sideImageGallery img {
-  width: 95%;
+  width: 99%;
   margin-left: 1px;
   margin-right: 1px;
   cursor: pointer !important;
@@ -81,6 +81,7 @@ html {
   border: 2px solid rgba(255, 255, 255, 1);
   -webkit-animation: imageAppendAnim 0.5s ease-in-out;
   animation: imageAppendAnim 0.5s ease-in-out;
+  line-height: 1 !important;
 }
 
 .videoContainer {
@@ -199,11 +200,9 @@ html {
 }
 
 .takePicLoading {
-  margin: 30% 45% 30%;
-  border-radius: 50%;
   width: 175px;
-  height: 175px;
-  animation: loadingIcon 1.2s infinite;
+  height: 100px;
+  animation: loadingIcon 1.5s infinite;
   animation-timing-function: ease-in;
   color: rgba(255, 99, 71, 1);
   font-size: 35px;
@@ -272,7 +271,7 @@ html {
 
 #takePicButton::before{
 	 font-family:dashicons;
-	content: "\f235";
+   content: "\f129";
 	font-size:40px;
 	 -webkit-transition: height 3s ; /* Safari */
        transition:  height 3s;

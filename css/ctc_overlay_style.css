@@ -54,15 +54,11 @@ html{
 
 .ctcOverlayClosebtnV{
 float:right;
-font-weight:bold;
- z-index: 25000!important; /* Sit on top */
+font-weight:bold; 
+z-index: 25000!important; /* Sit on top */
 font-size:35px;
- -webkit-transition: width 0.2s; /* Safari */
-     transition: width 0.2;
-     transition: 0.2s ease;
-     -webkit-transition: 0.2s ease;
-     -moz-transition: 0.2s ease;
-     top:0;
+
+top:0;
 
 
 }
@@ -73,18 +69,7 @@ font-size:35px;
 .ctcOverlayV .ctcOverlayClosebtnV::before {
 	content:"\00d7";
     text-decoration: none;
-    transition: 0.3s; /* Transition effects on hover (color) */
     color:rgba(255,255,255,0.8);
-          -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-     transform: scale(1.2);
-         -webkit-transition: width 0.2s; /* Safari */
-     transition: width 0.2;
-     transition: 0.2 ease;
-     -webkit-transition: 0.2s ease;
-     -moz-transition: 0.2s ease;
 
 }
 
@@ -92,18 +77,10 @@ font-size:35px;
 /* When you mouse over the navigation links, change their color */
 
  .ctcOverlayClosebtnV:hover{
-    -webkit-transition: width 0.2s; /* Safari */
-     transition: width 0.2;
-     transition: 0.2 ease;
-     -webkit-transition: 0.2s ease;
-     -moz-transition: 0.2s ease;
+
      cursor:pointer;
       color:rgba(255,255,255,1);
- 	  -webkit-transform: rotate(90deg);
-      -moz-transform: rotate(90deg);
-       -o-transform: rotate(90deg);
-    	-ms-transform: rotate(90deg);
-   		transform: rotate(90deg);
+ 	
  }
 
 

@@ -1,0 +1,27 @@
+{
+  "name": "takepicwp",
+  "version": "2.0.0",
+  "description": "Wordpress plugin to take picture with webcam , apply effect and crop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ujw0l/takePicWp.git"
+  },
+  "keywords": [
+    "webcam",
+    "image-crop"
+  ],
+  "author": "Ujw0L",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ujw0l/takePicWp/issues"
+  },
+  "homepage": "https://wordpress.org/plugins/take-pic/",
+  "dependencies": {
+    "js-crop": "^1.5.0",
+    "take-pic-js": "^2.1.1"
+  }
+}

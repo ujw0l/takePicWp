@@ -19,16 +19,6 @@ class takePic {
 	}
 
 
-	//function to add loading page
-	webCamloading(overlayId) {
-
-		let loadingDiv = document.createElement('div');
-		loadingDiv.id = "takePicLoading";
-		loadingDiv.classList.add('takePicLoading');
-		loadingDiv.innerHTML = 'Loading . . .';
-		document.getElementById(overlayId).appendChild(loadingDiv);
-
-	}
 
 	//function to add video camera in overlay
 	webCamOverlayHtml() {
@@ -44,15 +34,20 @@ class takePic {
 		document.body.insertBefore(overlayDiv, document.body.firstChild);
 
 		//add loading div
-		this.webCamloading('takePicOverlay');
-
-		//filter container
+		let loadingDiv = document.createElement('div');
+		loadingDiv.id = "takePicLoading";
+		loadingDiv.classList.add('takePicLoading');
+		loadingDiv.style = `margin-top:${(overlayDiv.offsetHeight - 100) / 2}px;margin-left:${(overlayDiv.offsetWidth - 175) / 2}px`;
+		loadingDiv.innerHTML = 'Loading...';
+		overlayDiv.appendChild(loadingDiv);
 		var filterContainer = document.createElement('div');
 		filterContainer.id = "takePicFilterContainer";
 		filterContainer.classList = "takePicFilterContainer";
-		overlayDiv.appendChild(filterContainer);
+		setTimeout(() => {
 
+			overlayDiv.appendChild(filterContainer);
 
+		}, 550)
 
 		let sideGallery = document.createElement('div');
 		sideGallery.id = "sideImageGallery";
@@ -141,71 +136,66 @@ class takePic {
 
 
 
+		navigator.mediaDevices.getUserMedia({
+			video: true
+		})
+			.then((mediaStream) => {
 
-		if (navigator.mediaDevices.getUserMedia) {
+				document.getElementById('videoStream').srcObject = mediaStream;
+				let imgStreams = document.getElementsByClassName('filterVideoStream');
+				for (var i in imgStreams) {
+					if (i >= 0) {
+						imgStreams[i].srcObject = mediaStream;
+					}
+				}
 
-			navigator.mediaDevices.getUserMedia({
-				video: true
+
+				document.querySelector('#takePicLoading').parentNode.removeChild(document.querySelector('#takePicLoading'));
+				setTimeout(function () {
+					let video = document.getElementById("videoStream");
+					let overlayDiv = document.getElementById('takePicOverlay');
+
+					let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
+					document.querySelector('#takePicClose').style.color = `rgba(255,255,255,1)`;
+					document.getElementById("captureButton").style.opacity = '1';
+					video.style.width = optVideoSize.width + 'px';
+					video.style.height = optVideoSize.height + 'px'
+					video.style.opacity = '1';
+					if (null != document.getElementById("changeCamButton")) {
+						document.getElementById("changeCamButton").style.opacity = '1';
+					}
+
+
+
+					takePic.positionDivs();
+				}, 350);
+
+				const track = mediaStream.getVideoTracks()[0];
+				imageCapture = new ImageCapture(track);
 			})
-				.then((mediaStream) => {
-
-					document.getElementById('videoStream').srcObject = mediaStream;
-					let imgStreams = document.getElementsByClassName('filterVideoStream');
-					for (var i in imgStreams) {
-						if (i >= 0) {
-							imgStreams[i].srcObject = mediaStream;
-						}
-					}
-
-
-					document.getElementById('takePicLoading').parentNode.removeChild(document.getElementById('takePicLoading'));
-					setTimeout(function () {
-						let video = document.getElementById("videoStream");
-						let overlayDiv = document.getElementById('takePicOverlay');
-
-						let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
-						document.querySelector('#takePicClose').style.color = `rgba(255,255,255,1)`;
-						document.getElementById("captureButton").style.opacity = '1';
-						video.style.width = optVideoSize.width + 'px';
-						video.style.height = optVideoSize.height + 'px'
-						video.style.opacity = '1';
-						if (null != document.getElementById("changeCamButton")) {
-							document.getElementById("changeCamButton").style.opacity = '1';
-						}
-
-
-
-						takePic.positionDivs();
-					}, 350);
-
-					const track = mediaStream.getVideoTracks()[0];
-					imageCapture = new ImageCapture(track);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-
-			//enumerate all cameras
-			navigator.mediaDevices.enumerateDevices().then((devices) => {
-				let i = 0;
-				devices.map((device) => {
-					if (device.kind == 'videoinput') {
-						if (i >= 1) {
-							//create element for take take snap shot
-							let changeCam = document.createElement('span');
-							changeCam.id = "changeCamButton";
-							changeCam.setAttribute('data-cam', '1');
-							changeCam.setAttribute('onclick', 'takePic.changeCam("' + device.deviceId + '");');
-							changeCam.setAttribute("title", "Change Webcam");
-							changeCam.innerHTML = '&#8635;';
-							document.querySelector("#buttonsDiv").appendChild(changeCam);
-						}
-						i++;
-					}
-				});
+			.catch((error) => {
+				console.log(error);
 			});
 
-		}
+		//enumerate all cameras
+		navigator.mediaDevices.enumerateDevices().then((devices) => {
+			let i = 0;
+			devices.map((device) => {
+				if (device.kind == 'videoinput') {
+					if (i >= 1) {
+						//create element for take take snap shot
+						let changeCam = document.createElement('span');
+						changeCam.id = "changeCamButton";
+						changeCam.setAttribute('data-cam', '1');
+						changeCam.setAttribute('onclick', 'takePic.changeCam("' + device.deviceId + '");');
+						changeCam.setAttribute("title", "Change Webcam");
+						changeCam.innerHTML = '&#8635;';
+						document.querySelector("#buttonsDiv").appendChild(changeCam);
+					}
+					i++;
+				}
+			});
+		});
 
 	}
 
@@ -283,11 +273,9 @@ class takePic {
 
 		hidden_canvas.style = `width: 20%;height: 20%;float: right;border: 1px solid rgba(255, 255, 255, 0.5); display:none`;
 		image.id = `take-pic-img-${timeStamp}`;
-		image.style.height = (wdHtRatio * (0.95 * sideGallery.offsetWidth)) + 'px';
+		image.style.height = `${wdHtRatio * sideGallery.offsetWidth}px`;
 		image.addEventListener('mouseenter', () => {
 			if ('active' != event.target.getAttribute('data-crop')) {
-
-
 
 				event.target.setAttribute('data-crop', 'active')
 				new jsCrop('#take-pic-img-' + timeStamp, { saveButton: false }, [
