@@ -54,11 +54,10 @@ html{
 
 .ctcOverlayClosebtnV{
 float:right;
-font-weight:bold; 
+
 z-index: 25000!important; /* Sit on top */
 font-size:35px;
-
-top:0;
+top:0px;
 
 
 }
@@ -344,7 +343,6 @@ div.ctcOverlayCountAndCurrentImageV{
     background-size:contain !important;
     cursor:pointer !important;
     background-color:rgba(0,0,0,0.3)!important;
-    border-radius:10% 40%;
     -webkit-transition: width 0.5s; /* Safari */
     transition: width 0.5s;
     transition: 0.2s ease;
@@ -358,7 +356,6 @@ div.ctcOverlayCountAndCurrentImageV{
 
 .ctcOverlayThumbGalleryContainerV span:hover{
 	background-color:rgba(255,255,255,0.8) !important;
-		border-radius:5% 30%;
       -webkit-transition: width 0.5s; /* Safari */
     transition: width 0.5s;
    transition: 0.5s ease;

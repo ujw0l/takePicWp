@@ -1,3 +1,4 @@
+
 /** 
  * Js Crop
 * javascript library that enables image cropping
@@ -332,7 +333,7 @@ class jsCrop {
                 event.target.addEventListener('mousemove', event => this.createCropBox(event));
 
             });
-            e.target.innerHTML = '&#9986;';
+            e.target.innerHTML = '&#9747;';
             e.target.title = 'Crop';
 
         } else if ('crop-ready' === imgEl.getAttribute('data-crop-status')) {

@@ -270,7 +270,7 @@ class takePic {
 		hidden_canvas.style = `width: 20%;height: 20%;float: right;border: 1px solid rgba(255, 255, 255, 0.5); display:none`;
 		image.id = `take-pic-img-${timeStamp}`;
 		image.style.height = `${wdHtRatio * sideGallery.offsetWidth}px`;
-		image.addEventListener('mouseenter', () => {
+		image.addEventListener('mouseenter', event => {
 			if ('active' != event.target.getAttribute('data-crop')) {
 
 				event.target.setAttribute('data-crop', 'active')
@@ -437,7 +437,7 @@ class takePic {
 	static getFilterArrayObj(param) {
 
 		if (param === "prop") {
-			return ['None', 'EffectTwo', 'Multiple', "GrayScale", "Sepia", "Contrast", "Hue", "Tint", "UjW0L", 'InvertMultiple', "Invert", "Bcg", "Gcbhss"];
+			return ['None', 'EffectTwo', 'Multiple', "GrayScale", "Sepia", "Contrast", "Hue", "Tint", "UjW0L", 'InvertMultiple', "Invert", "Bcg", "Gcbhss", "Saturate"];
 		} else {
 
 			if (param !== undefined) {
@@ -455,6 +455,7 @@ class takePic {
 					cssFilterContrast: "-webkit-filter: contrast(3); filter: contrast(3);",
 					cssFilterBcg: "-webkit-filter: brightness(1.26) contrast(1.53) grayscale(0.65); filter: brightness(1.26) contrast(1.53) grayscale(0.65);",
 					cssFilterGcbhss: "-webkit-filter: grayscale(0.48) contrast(1.99) brightness(2.32) hue-rotate(-43deg) saturate(0.75) sepia(0.79); filter: grayscale(0.48) contrast(1.99) brightness(2.32) hue-rotate(-43deg) saturate(0.75) sepia(0.79);",
+					cssFilterSaturate: '-webkit-filter: saturate(200%); filter: saturate(200%);'
 				}[param];
 			}
 		}

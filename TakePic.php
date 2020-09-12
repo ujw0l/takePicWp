@@ -3,7 +3,7 @@
 Plugin Name: Take Pic
 Plugin URI: https://github.com/ujw0l/takePicWp
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 2.0.0
+Version: 2.0.1
 Author: Ujwol Bastakoti
 text-domain : take-pic
 Author URI:http://ujw0l.github.io/
@@ -17,7 +17,7 @@ class takePicWidget extends WP_Widget{
 			parent::__construct(
 					'takePic', // Base ID
 					'Take Pic', // Name
-					array( 'description' => __( 'This plugin enables user to take picture with their webcam and upload them', 'text_domain' ), ) // Args
+					array( 'description' => __( 'This plugin enables user to take picture with their webcam and upload them', 'take-pic' ), ) // Args
 			);
 			
 			add_action( 'wp_enqueue_scripts', array($this, 'load_dashicons_front_end') );
@@ -42,7 +42,7 @@ class takePicWidget extends WP_Widget{
 
 		    }
 		    else{
-					$title = __( 'Take Pic', 'text_domain' );
+					$title = __( 'Take Pic', 'take-pic' );
 		    }
 
 				?>

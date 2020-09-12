@@ -654,7 +654,7 @@ class ctcOverlayViewer {
 			const sideImgGallery = document.getElementById("ctcOverlayThumbGalleryContainerV");
 			let containerMarginTop = Math.round(screenHeight - optimizedImageHeight) / 2;
 			let navIconMargin = Math.round((optimizedImageHeight - (1.6 * optimizedFontSize)) / 2);
-			let closeMarginTop = Math.round(containerMarginTop - (closeBtn.offsetHeight / 1.4));
+			let closeMarginTop = Math.round(containerMarginTop - (closeBtn.offsetHeight / 1.4)) - 5;
 			let galleryRightNav = document.getElementById("ctcGalleryRightNavV");
 			let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
 
