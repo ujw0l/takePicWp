@@ -20,7 +20,7 @@ class takePic {
 
 
 
-	//function to add video camera in overlay
+	/**function  to add video camera in overlay*/
 	webCamOverlayHtml() {
 
 
@@ -127,15 +127,11 @@ class takePic {
 	}
 
 
-	//function to stream video
+	/**function  to stream video*/
 	accessCamera() {
 
 		var video = document.getElementById("videoStream");
-
 		var imageCapture;
-
-
-
 		navigator.mediaDevices.getUserMedia({
 			video: true
 		})
@@ -199,7 +195,7 @@ class takePic {
 
 	}
 
-	//function to change camera
+	/**function  to change camera*/
 	static changeCam(camId) {
 		document.getElementById('buttonsDiv').style.display = 'none';
 		navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -255,7 +251,7 @@ class takePic {
 
 	}
 
-	//function to take image
+	/**function  to take image*/
 	takeSnapshot() {
 
 		document.querySelector('#takePicOverlay').style.backgroundColor = 'rgba(255, 255, 255, 1)';
@@ -345,7 +341,7 @@ class takePic {
 	}
 
 
-	//function to resize the the components based on screen size
+	/**function  to resize the the components based on screen size*/
 	resizeSnapShot() {
 
 		let overlayDiv = document.querySelector('#takePicOverlay');
@@ -396,7 +392,7 @@ class takePic {
 
 	}
 
-
+	/**function to pistions components */
 	static positionDivs() {
 
 
@@ -417,7 +413,7 @@ class takePic {
 	}
 
 
-	//css to apply filter to video
+	/**css to apply filter to video*/
 	applyFilter(filter) {
 		let video = document.getElementById("videoStream");
 		let overlayDiv = document.getElementById('takePicOverlay');
@@ -437,7 +433,7 @@ class takePic {
 		document.getElementById(filter.replace("css", "takePic")).classList.add("filterVideoStreamActive");
 	}
 
-	//function to set radio button css properties
+	/**function  to set radio button css properties*/
 	static getFilterArrayObj(param) {
 
 		if (param === "prop") {
@@ -468,7 +464,7 @@ class takePic {
 
 
 
-	//funtion to sanitize css filter
+	/**funtion to sanitize css filter*/
 	static sanitizeFilter(filter) {
 
 		let cleanFilter = '';
@@ -485,7 +481,7 @@ class takePic {
 	}
 
 
-	// function to optimize video site
+	/**function to optimize video site*/
 	static getOptimizedVideoSize(screenWidth, screenHeight, videoActualWidth, videoActualHeight) {
 
 		var videoScreenHeightRatio = 0,
@@ -563,7 +559,7 @@ class takePic {
 		}
 
 
-		//at last check it optimized width is still large			
+		//at last check it optimized width is still large
 		if (optimizedVideoWidth > (vidPercent * screenWidth)) {
 			optimizedVideoWidth = vidPercent * screenWidth;
 			optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
@@ -576,7 +572,7 @@ class takePic {
 	}
 
 
-	//function to access all uploaded images
+	/**function  to access all uploaded images*/
 	static viewUploadedImages() {
 
 		var xhttp = new XMLHttpRequest();
@@ -624,7 +620,7 @@ class takePic {
 
 
 
-	//function to create hidden image album based on ajax response
+	/**function  to create hidden image album based on ajax response*/
 	static createImageAlbum(response) {
 
 		var imgDir = response.dir;
@@ -665,7 +661,7 @@ class takePic {
 
 
 
-	//function to upload imge to server
+	/**function  to upload imge to server*/
 	static deleteImage(fileName, imageNum) {
 
 		if (confirm(takePicMessage.delete_confirm)) {
@@ -715,7 +711,7 @@ class takePic {
 	}
 
 
-	//function to remove deleted images from document
+	/**function  to remove deleted images from document*/
 	static removeDeletedImage(imageNum) {
 
 		let hiddenAlbum = document.getElementById("hiddenImageAlbum");

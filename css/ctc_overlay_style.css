@@ -243,6 +243,7 @@ div.ctcOverlayCountAndCurrentImageV{
   -webkit-transition: 0.2s ease;
   -moz-transition: 0.2s ease;
 
+
 }  
 #takePicUploadButton{
 	text-decoration:none !important;
@@ -289,6 +290,7 @@ div.ctcOverlayCountAndCurrentImageV{
    transition: 0.2s ease;
   -webkit-transition: 0.2s ease;
   -moz-transition: 0.2s ease;
+  padding-top:5px;
 }
 
 #takePicDeleteButton::before{

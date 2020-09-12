@@ -1,9 +1,9 @@
-/*
- * Js Crop 
- * javascript library that enables image cropping 
- * https://ujwolbastakoti.wordpress.com/
+/** 
+ * Js Crop
+* javascript library that enables image cropping
+* https://ujwolbastakoti.wordpress.com/
  * MIT license
- *  
+*  
  */
 
 'use strict'
@@ -38,7 +38,7 @@ class jsCrop {
     }
 
 
-    /*
+    /**
     * Create overlay and initialize cropping
     *
     *@param img image to be cropped
@@ -106,7 +106,7 @@ class jsCrop {
 
     }
 
-    /*
+    /**
     * Adjust crop overlay on window resize
     *
     *@param e resize event
@@ -151,13 +151,13 @@ class jsCrop {
         }
     }
 
-    /*
+    /**
     * Create toolbar 
     *
     *@param overlayDiv Overlay div object 
     *@param imgSrc  Image source of image to be loaded
     *@param imgDim  Image dimension to load
-	*@param param2 for future extension
+    *@param param2 for future extension
     */
 
     createToolbar(overlayDiv, imgSrc, imgDim, param2, param3) {
@@ -170,7 +170,7 @@ class jsCrop {
 
         let btnFontColor = undefined != param2 && undefined != param2.customColor && undefined != param2.customColor.buttonFontColor ? param2.customColor.buttonFontColor : 'rgba(255,255,255,1)';
         let btnBgColor = undefined != param2 && undefined != param2.customColor && undefined != param2.customColor.buttonBgColor ? param2.customColor.buttonBgColor : 'rgba(0,0,0,1)';
-        let btnStyle = `color:${btnFontColor};opacity:0;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;background-color:${btnBgColor};text-align:center;width:98%;height:${toolbar.offsetWidth - 6}px;border:1px solid ${btnBgColor};box-shadow:-1px -1px 10px ${btnBgColor};`;
+        let btnStyle = `line-height:1.1;color:${btnFontColor};opacity:0;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;background-color:${btnBgColor};text-align:center;width:98%;height:${toolbar.offsetWidth - 6}px;border:1px solid ${btnBgColor};box-shadow:-1px -1px 10px ${btnBgColor};`;
         let btnMouseenter = `this.style.boxShadow ='-2px -2px 10px ${btnBgColor}'; this.style.borderRadius='20%'`;
         let btnMouseleave = `this.style.boxShadow ='-1px -1px 1px ${btnBgColor}';this.style.borderRadius='25%'`;
 
@@ -313,7 +313,7 @@ class jsCrop {
 
 
 
-    /*
+    /**
     * Active crop area select
     *
     *@param e  Select area button click event
@@ -350,7 +350,7 @@ class jsCrop {
     }
 
 
-    /*
+    /**
     * Revert to original image
     *
     *@param e  Button click event
@@ -382,7 +382,7 @@ class jsCrop {
     }
 
 
-    /*
+    /**
     * Resotre previous crop step
     *
     *@param e button click event
@@ -407,7 +407,7 @@ class jsCrop {
         }
     }
 
-    /*
+    /**
      * Resotre next crop step
      *
      *@param e button click event
@@ -435,7 +435,7 @@ class jsCrop {
         }
     }
 
-    /*
+    /**
     * Restore current crop state to blob
     *
     */
@@ -457,9 +457,9 @@ class jsCrop {
         return tempCanv.toDataURL(imgType, imgQuality);
     }
 
-    /*
-   * Close overlay on close button click
-   */
+    /**
+    * Close overlay on close button click
+    */
 
     closeOverlay() {
         document.body.removeChild(document.querySelector('#js-crop-overlay'));
@@ -468,7 +468,7 @@ class jsCrop {
         document.querySelector('head').removeChild(document.querySelector('#ctc-scroll-css'));
     }
 
-    /*
+    /**
     *End crop on crop button click
     */
 
@@ -559,14 +559,14 @@ class jsCrop {
 
 
 
-    /*
+    /**
     * Optimize image size to fit screen
     *
     *@param screenWidth  window.innerWidth
     *@param screenHeight  window.innerHeight
     *@param imageActualWidth  actual width of image
     *@param imageActualHeight  actual height of image
-	*@return object object with optimized image width and height
+    *@return object object with optimized image width and height
     */
     getOptimizedImageSize(screenWidth, screenHeight, imageActualWidth, imageActualHeight) {
 
@@ -649,7 +649,7 @@ class jsCrop {
     }
 
 
-    /*
+    /**
     * Set crop canvas coordinate
     *
     *@param e mousmove event
@@ -711,12 +711,12 @@ class jsCrop {
 
     }
 
-    /*
-	*Handle keystroke event
-	* 
-	*@param e Key stroke event
-	*
-	*/
+    /**
+    *Handle keystroke event
+    * 
+    *@param e Key stroke event
+    *
+    */
     onKeyStroke(event) {
         let cropRect = document.querySelector('#cropRect');
 
