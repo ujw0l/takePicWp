@@ -28,13 +28,17 @@ class takePicWidget extends WP_Widget{
 			
 		}
 
-		//load dashicon
+		/**l
+         * oad dashicon
+         */
 		public function load_dashicons_front_end() {
 		    wp_enqueue_style( 'dashicons' );
 		}
 
 
-
+         /**
+          * Wp widget form 
+        */
 		public function form( $instance ) {
 
 		    if ( isset( $instance[ 'title' ] ) ) {
@@ -127,7 +131,9 @@ class takePicWidget extends WP_Widget{
 
 
 		
-		//function to register takePic widget
+		/**
+         * function to register takePic widget
+         */
 		public function register_takePicWidget(){
 		    register_widget( "takePicWidget" );
 		}
@@ -137,32 +143,34 @@ class takePicWidget extends WP_Widget{
 }
 
 
-/*
+/** 
  * class to handle other plugin functionlities
- * 
- * */
-
+ */
 
 class takePicPlugin{
     
     
     public function __construct(){
         
-       
         self::allRequiredWpActions();
         self::allRequiredAjaxAction();
         
     }
     
-    //function to register required wp action
+    /**
+     * function to register required wp action
+     */
     public function allRequiredWpActions(){
         
         add_action('admin_menu', array($this, 'takePicAdminMenu'));
         add_action('admin_footer', array($this,'takePicRemoveUpload_javascript'));
+        add_action('init', array($this,'takePicRegisterBlock'));
         
     }
     
-    //function to register required ajax function
+    /**
+     * function to register required ajax function
+     */
     public function allRequiredAjaxAction(){
         
         add_action('wp_ajax_ajaxUploadImage', array($this ,'ajaxUploadImage'));
@@ -179,10 +187,10 @@ class takePicPlugin{
         
         add_action('wp_ajax_takePicAdminRemoveUploadAjax',array($this,'takePicAdminRemoveUploadAjax'));
         
-        
-        
     }
-     
+     /**
+      * Admin menu 
+      */
     public function takePicAdminMenu(){
         
         
@@ -199,7 +207,9 @@ class takePicPlugin{
             endif;
         
     }
-    
+    /** 
+     * Admin menu html 
+     */
     public function takePicAdminHtml(){
        
         ?>
@@ -215,8 +225,6 @@ class takePicPlugin{
         		     array_map(function($userObj){
         		         $user = get_user_by('login', $userObj->user_login);
         		         
-        		       
-        		       
         		         if( !empty($user->first_name) && !empty($user->last_name)){
         		             $name = $user->first_name." ".$user->last_name;  
         		         }else{
@@ -259,7 +267,9 @@ class takePicPlugin{
         
     }
     
-    //function to remove user upload with javscript
+    /**
+     * function to remove user upload with javscript
+     * */
     public function takePicRemoveUpload_javascript(){
      ?>
      <script type="text/javascript">
@@ -313,7 +323,9 @@ class takePicPlugin{
      <?php    
     }
     
-    //ajax function function tp handle remove request 
+    /**
+     * ajax function function tp handle remove request 
+     */
     public function takePicAdminRemoveUploadAjax(){
        
         $uploadDir = wp_upload_dir();
@@ -340,7 +352,9 @@ class takePicPlugin{
    * frontend coding
    * 
    */  
-    
+    /** 
+     * function to upload image with ajax 
+     */
   public function ajaxUploadImage(){
           
     if(is_user_logged_in()):
@@ -380,7 +394,9 @@ class takePicPlugin{
        
     }
     
-    
+    /**
+     * Convert blob to png and save 
+     */
     private function base64ToPngSave( $base64String,$directory){
 
         $outPutFile = $directory.'/'.time().'.png';  
@@ -399,7 +415,9 @@ class takePicPlugin{
   
     
     
-    //function to delete image
+    /**
+     * function to delete image
+     */
     public function ajaxDeleteImage(){
     
         $uploadDir = wp_upload_dir();
@@ -416,7 +434,9 @@ class takePicPlugin{
     }
     
     
-    //function to get all uploaded 
+    /**
+     * function to get all uploaded 
+     */
     public function ajaxGetUploadedImages(){
         $current_user = wp_get_current_user();
         $uploadDir = wp_upload_dir();
@@ -435,7 +455,54 @@ class takePicPlugin{
              endif;
         wp_die();
     }
+
+
+/**
+ * Register block for plugin
+ * 
+ */
+    public function takePicRegisterBlock(){
+
+
+        // Block Editor Script.
+   wp_register_script(
+       'take-pic-block-editor',
+       plugins_url( 'js/take-pic-block.js',__FILE__ ),
+       array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
+    );
+
+    wp_localize_script( 'take-pic-block-editor', 'takePic', $this->getUserUploadedImgs());
+
+    register_block_type(
+       'take-pic/take-pic-block',
+       array(
+          'style'         => '',
+          'editor_style'  => '',
+          'editor_script' => 'take-pic-block-editor',
+       )
+    );
+   
+    }
+/**
+ * Get uploaded images by logged in user
+ * */
+public function getUserUploadedImgs(){
+
+    $current_user = wp_get_current_user();
+       $uploadDir = wp_upload_dir();
+     
+       
+ 
+       $userDirname = $uploadDir['basedir']. '/' . $current_user->user_login;
+        $imgArr = scandir($userDirname);
+        unset($imgArr[0]);
+        unset($imgArr[1]);
+       return array( 'dirUrl'=>content_url().'/uploads/'.$current_user->user_login,
+       'files'=> $imgArr
+);
+    }
     
+   
 }
 new takePicPlugin();
 new takePicWidget();
