@@ -67,6 +67,8 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 3.	All of the images users have uploded in CTC overlay gallery viewer 
 4.	Admin panel view of plugin
 5.  Active widget view on backend
+6.  Takepic gutenberg block
+7.  Takepic gutenberg block settings
 
 
 == Changelog ==

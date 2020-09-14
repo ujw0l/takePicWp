@@ -8,7 +8,7 @@ wp.blocks.registerBlockType('take-pic/take-pic-block', {
     icon: 'images-alt',
     description: __("Take Pic image embed", 'take-pic'),
     category: 'media',
-    keywords: [__('take pic'), __('webcam')],
+    keywords: [__('take pic', 'take-pic'), __('webcam', 'take-pic')],
     attributes: {
         img: { type: 'string', default: imgList[imgList.length - 1] },
         title: { type: 'string', default: __('Choose title', 'take-pic') }
