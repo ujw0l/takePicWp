@@ -4,10 +4,11 @@ Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.0
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 License: GPLv2
 
-Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, 
+Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, as well as
+plugin gives option of embed uploaded image to post using gutenberg block.
 
 
 == Description ==
@@ -66,6 +67,8 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 3.	All of the images users have uploded in CTC overlay gallery viewer 
 4.	Admin panel view of plugin
 5.  Active widget view on backend
+6.  Takepic gutenberg block
+7.  Takepic gutenberg block settings
 
 
 == Changelog ==
@@ -92,6 +95,10 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 * Js Crop added 
 * Image croppable
 * Better UI
+
+= 2.1.0 =
+* Gutenberg block added
+
 
  
 
