@@ -25,7 +25,7 @@ wp.blocks.registerBlockType('take-pic/take-pic-block', {
                 el(PanelBody, null, imgList.map(x => el('img', {
                     src: x,
                     onClick: () => props.setAttributes({ img: x }),
-                    style: { 'width': '122px', 'cursor': 'pointer', 'height': 'auto', 'border-left': '5px solid rgba(255,255,255,1)' }
+                    style: { 'width': '115px', 'cursor': 'pointer', 'height': 'auto', 'border-left': '5px solid rgba(255,255,255,1)' }
                 }
                 )))))
     },
