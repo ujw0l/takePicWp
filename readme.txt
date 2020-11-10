@@ -22,6 +22,12 @@ Plugin also lets you apply diffrent predefined image effects to the images while
 
 Note: Plugin works only on secured server (only under https:// not http://) 
     
+    ### What's Next
+Checkout out my other projects for WordPress and Javascript
+
+[Plugins](https://profiles.wordpress.org/ujw0l/#content-plugins) - Free plugins
+
+[JS libraries](https://www.npmjs.com/~ujw0l) - Free JS Libraries
 
 == Installation ==
 
