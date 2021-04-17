@@ -18,8 +18,19 @@ Ideal for social networking or image uploading sites.
 Plugin also lets you apply diffrent predefined image effects to the images while giving them ability to snaphot and upload it with filter.
 
 
+
+    ### What's Next
+Checkout out my other projects for WordPress and Javascript
+
+[Plugins](https://profiles.wordpress.org/ujw0l/#content-plugins) - Free plugins
+
+[JS libraries](https://www.npmjs.com/~ujw0l) - Free JS Libraries
+=======
 Note: Plugin works only on secured server (only under https:// not http://) 
     
+
+    
+
 
 == Installation ==
 
