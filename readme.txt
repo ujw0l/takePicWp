@@ -2,9 +2,9 @@
 Contributors: ujw0l
 Tags: webcam, image upload,  webcam widget, image effects
 Requires at least: 4.0
-Tested up to: 5.5
+Tested up to: 5.7.1
 Requires PHP: 5.0
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, as well as
@@ -18,15 +18,17 @@ Ideal for social networking or image uploading sites.
 Plugin also lets you apply diffrent predefined image effects to the images while giving them ability to snaphot and upload it with filter.
 
 
+
     ### What's Next
 Checkout out my other projects for WordPress and Javascript
 
 [Plugins](https://profiles.wordpress.org/ujw0l/#content-plugins) - Free plugins
 
 [JS libraries](https://www.npmjs.com/~ujw0l) - Free JS Libraries
-
-
+=======
 Note: Plugin works only on secured server (only under https:// not http://) 
+    
+
     
 
 
@@ -105,6 +107,10 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 
 = 2.1.0 =
 * Gutenberg block added
+
+
+= 2.1.1 =
+* Minor bug fix
 
 
  
