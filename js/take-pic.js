@@ -26,7 +26,9 @@ class takePic {
 
 		window.scrollTo(0, 0);
 
-		document.querySelector('#wpadminbar').style.zIndex = '99998';
+		if (null !== document.querySelector('#wpadminbar')) {
+			document.querySelector('#wpadminbar').style.zIndex = '99998';
+		}
 		let overlayDiv = document.createElement('div');
 		overlayDiv.id = "takePicOverlay";
 		overlayDiv.className = "takePicOverlay";
@@ -43,11 +45,10 @@ class takePic {
 		var filterContainer = document.createElement('div');
 		filterContainer.id = "takePicFilterContainer";
 		filterContainer.classList = "takePicFilterContainer";
-		setTimeout(() => {
 
-			overlayDiv.appendChild(filterContainer);
+		overlayDiv.appendChild(filterContainer);
 
-		}, 550)
+
 
 		let sideGallery = document.createElement('div');
 		sideGallery.id = "sideImageGallery";
@@ -148,7 +149,7 @@ class takePic {
 
 				document.querySelector('#takePicLoading').parentNode.removeChild(document.querySelector('#takePicLoading'));
 				setTimeout(function () {
-					let video = document.getElementById("videoStream");
+					let video = document.querySelector("#videoStream");
 					let overlayDiv = document.getElementById('takePicOverlay');
 
 					let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
@@ -156,13 +157,11 @@ class takePic {
 					document.getElementById("captureButton").style.opacity = '1';
 					video.style.width = optVideoSize.width + 'px';
 					video.style.height = optVideoSize.height + 'px'
+
 					video.style.opacity = '1';
 					if (null != document.getElementById("changeCamButton")) {
 						document.getElementById("changeCamButton").style.opacity = '1';
 					}
-
-
-
 					takePic.positionDivs();
 				}, 350);
 
