@@ -1,5 +1,6 @@
 const el = wp.element.createElement;
 const { SelectControl, PanelBody } = wp.components;
+const __ = wp.i18n.__;
 const { InspectorControls, RichText } = wp.blockEditor;
 const imgList = Object.keys(takePic.files).map(x => takePic.dirUrl + '/' + takePic.files[x]);
 
