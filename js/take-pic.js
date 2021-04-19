@@ -147,6 +147,9 @@ class takePic {
 
 
 				document.querySelector('#takePicLoading').parentNode.removeChild(document.querySelector('#takePicLoading'));
+				let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 20 : 850;
+
+
 				setTimeout(function () {
 					let video = document.querySelector("#videoStream");
 					let overlayDiv = document.getElementById('takePicOverlay');
@@ -162,7 +165,7 @@ class takePic {
 						document.getElementById("changeCamButton").style.opacity = '1';
 					}
 					takePic.positionDivs();
-				}, 850);
+				}, vidTimeOut);
 
 				const track = mediaStream.getVideoTracks()[0];
 				imageCapture = new ImageCapture(track);
