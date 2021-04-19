@@ -11,9 +11,8 @@
 class takePic {
 
 	constructor() {
-
-		this.accessCamera();
 		this.webCamOverlayHtml();
+		this.accessCamera();
 		window.addEventListener("resize", () => { this.resizeSnapShot() });
 
 	}
@@ -98,7 +97,7 @@ class takePic {
 		buttonDiv.appendChild(captureButton);
 		videoContainer.appendChild(buttonDiv);
 
-		if (navigator.userAgent.indexOf('Chrome') > -1 || navigator.userAgent.indexOf('Firefox') > -1) {
+		if (navigator.userAgent.indexOf('Chrome') > -1 || navigator.userAgent.indexOf('Firefox') > -1 || navigator.userAgent.indexOf('Safari') > -1) {
 
 			//create slection video with filter	
 			takePic.getFilterArrayObj('prop').map(
@@ -163,7 +162,7 @@ class takePic {
 						document.getElementById("changeCamButton").style.opacity = '1';
 					}
 					takePic.positionDivs();
-				}, 350);
+				}, 850);
 
 				const track = mediaStream.getVideoTracks()[0];
 				imageCapture = new ImageCapture(track);
@@ -317,7 +316,6 @@ class takePic {
 		// Context object for working with the canvas.
 		let context = hidden_canvas.getContext('2d');
 		let newFilter = takePic.sanitizeFilter(takePic.getFilterArrayObj(document.getElementById("videoStream").getAttribute("data-filter")));
-
 
 
 		// Draw a copy of the current frame from the video on the canvas.
