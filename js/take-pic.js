@@ -147,7 +147,7 @@ class takePic {
 
 
 				document.querySelector('#takePicLoading').parentNode.removeChild(document.querySelector('#takePicLoading'));
-				let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 20 : 850;
+				let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 350 : 850;
 
 
 				setTimeout(function () {
