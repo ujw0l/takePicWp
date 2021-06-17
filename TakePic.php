@@ -367,6 +367,7 @@ class takePicPlugin{
            
                       if(wp_mkdir_p($userDirname)):
                            if($this->base64ToPngSave($_POST['image'],$userDirname)):
+
                                 echo __("Image sucessfully uploaded",'take-pic');
                            else:
                               echo __("Image couldn't be uploaded at this time",'take-pic');
@@ -404,7 +405,6 @@ class takePicPlugin{
        
         if(strpos($base64String,'data:image/png;base64,') === 0): 
             if(file_put_contents($outPutFile, base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '',$base64String))))):
-            
                 return true;
             else:
                    return false;
