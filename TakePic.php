@@ -3,7 +3,7 @@
 Plugin Name: Take Pic
 Plugin URI: https://github.com/ujw0l/takePicWp
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 2.1.1
+Version: 2.5.0
 Author: Ujwol Bastakoti
 text-domain : take-pic
 Author URI:http://ujw0l.github.io/
@@ -162,10 +162,11 @@ class takePicPlugin{
      */
     public function allRequiredWpActions(){
         
+        add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendJs' ));
         add_action('admin_menu', array($this, 'takePicAdminMenu'));
         add_action('admin_footer', array($this,'takePicRemoveUpload_javascript'));
+        add_action( 'admin_enqueue_scripts', array($this,'enequeAdminJs' ));
         add_action('init', array($this,'takePicRegisterBlock'));
-        
     }
     
     /**
@@ -468,7 +469,7 @@ class takePicPlugin{
    wp_register_script(
        'take-pic-block-editor',
        plugins_url( 'js/take-pic-block.js',__FILE__ ),
-       array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
+       array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n','jsMasonry' ),
     );
 
     wp_localize_script( 'take-pic-block-editor', 'takePic', $this->getUserUploadedImgs());
@@ -501,8 +502,29 @@ public function getUserUploadedImgs(){
        'files'=> $imgArr
 );
     }
-    
+
+  /**
+   * since 2.5.0
+   * Eneque Js masonry on admin section
+   * 
+   *  */  
+    public function enequeAdminJs(){
+        wp_enqueue_script('jsMasonry', plugins_url( 'js/js-masonry.js',__FILE__ ),array());
+    } 
    
+    /**
+     * 
+     * since 2.5.0
+     * 
+     * Eneque forntend js files
+     */
+
+     public function enequeFrontendJs(){
+        wp_enqueue_script('jsMasonry', plugins_url( 'js/js-masonry.js',__FILE__ ),array());
+        wp_enqueue_script('takePicFrontEndJs', plugins_url( 'js/take-pic-frontend.js',__FILE__ ),array('jsMasonry'));
+
+     }
+
 }
 new takePicPlugin();
 new takePicWidget();
