@@ -380,7 +380,7 @@ class takePicPlugin{
                         echo __("Image sucessfully uploaded",'take-pic');
                    else:
                    
-                   var_dump($this->base64ToPngSave($_POST['image'],$userDirname));
+                   $this->base64ToPngSave($_POST['image'],$userDirname);
                         echo __("Couldn't upload image, try again later",'take-pic');
                    endif;
               

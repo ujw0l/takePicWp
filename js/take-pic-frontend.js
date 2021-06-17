@@ -3,4 +3,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
     Array.from(document.querySelectorAll('.takePicImgGal img')).map(x => x.addEventListener('click', e => window.open(e.target.src)))
 
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
 })
