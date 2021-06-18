@@ -72,6 +72,7 @@ wp.blocks.registerBlockType('take-pic/take-pic-gallery-block', {
         useEffect(() => {
             Array.from(document.querySelectorAll('.takePicImgGal Img')).map(x => x.style.width = '');
             jsMas.prepMas('.takePicImgGal');
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
         }, [attributes.imgGal, attributes.imgWidth]);
 
         return el('div', null, el('div', {},
