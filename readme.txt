@@ -1,10 +1,10 @@
 === Take Pic ===
 Contributors: ujw0l
-Tags: webcam, image upload,  webcam widget, image effects
+Tags: block,blocks,webcam,image-upload,image-effects
 Requires at least: 4.0
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.0
-Stable tag: 2.1.2
+Stable tag: 2.5.0
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, as well as
@@ -77,7 +77,10 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 4.	Admin panel view of plugin
 5.  Active widget view on backend
 6.  Takepic gutenberg block
-7.  Takepic gutenberg block settings
+7.  Takepic block image select in modal
+8.  Takepic  gallery block
+9.  Images in modal window for selection
+10. Frontend view of gallery
 
 
 == Changelog ==
@@ -115,4 +118,7 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 
  = 2.1.2 =
 * Chrome bug fix
+
+ = 2.5.0 =
+* Take Pic Image gallery block added
 

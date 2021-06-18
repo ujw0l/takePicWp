@@ -22,6 +22,7 @@
   "homepage": "https://wordpress.org/plugins/take-pic/",
   "dependencies": {
     "js-crop": "^1.5.0",
-    "take-pic-js": "^2.1.1"
+    "take-pic-js": "^2.1.1",
+    "js-masonry": "^1.1.0"
   }
 }
