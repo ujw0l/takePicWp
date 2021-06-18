@@ -62,7 +62,7 @@ wp.blocks.registerBlockType('take-pic/take-pic-gallery-block', {
     attributes: {
         imgGal: { type: 'Array', default: [] },
         imgWidth: { type: 'Number', default: 48 },
-        galTitle: { type: 'String', default: __('Choose Gallery Title', 'take-pic') }
+        galTitle: { type: 'String', default: __('Choose gallery title', 'take-pic') }
     },
     example: {
 
@@ -100,9 +100,6 @@ wp.blocks.registerBlockType('take-pic/take-pic-gallery-block', {
 
                                 }
                             }),
-
-
-
                         )
                     })),
 
