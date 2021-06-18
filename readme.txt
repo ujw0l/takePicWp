@@ -77,7 +77,7 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 4.	Admin panel view of plugin
 5.  Active widget view on backend
 6.  Takepic gutenberg block
-7.  Takepic gutenberg block settings
+7.  Takepic block image select in modal
 8.  Takepic  gallery block
 9.  Images in modal window for selection
 10. Frontend view of gallery
