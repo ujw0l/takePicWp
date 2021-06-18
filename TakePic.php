@@ -403,6 +403,7 @@ class takePicPlugin{
 
         $outPutFile = $directory.'/'.time().'.png';  
        
+
         if(strpos($base64String,'data:image/png;base64,') === 0): 
             if(file_put_contents($outPutFile, base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '',$base64String))))):
                 return true;

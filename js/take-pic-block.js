@@ -22,17 +22,33 @@ wp.blocks.registerBlockType('take-pic/take-pic-block', {
 
     },
     edit: props => {
-
+        const [isOpen, setOpen] = useState(false);
         return el('div', null, el('div', {},
             el('img', { src: props.attributes.img })),
-            el(RichText, { tag: 'p', formattingControls: [], onChange: val => props.setAttributes({ title: val }), value: props.attributes.title, placeholder: props.attributes.title }),
-            el(InspectorControls, null,
-                el(PanelBody, null, imgList.map(x => el('img', {
-                    src: x,
-                    onClick: () => props.setAttributes({ img: x }),
-                    style: { 'width': '122px', 'cursor': 'pointer', 'height': 'auto', 'border-left': '5px solid rgba(255,255,255,1)' }
-                }
-                )))))
+            el(RichText, { tag: 'p', allowedFormats: [], onChange: val => props.setAttributes({ title: val }), value: props.attributes.title, placeholder: props.attributes.title }),
+            el('div', { style: { padding: '10px', backgroundColor: 'rgba(255,255,255,1)' } },
+                el(Button, { style: { border: '1px solid rgba(0,0,0,1)', marginLeft: 'auto', marginRight: 'auto', display: 'block' }, variant: 'secondary', onClick: () => setOpen(true) }, __('Select Image', 'take-pic')),
+
+                isOpen && el(Modal, { title: __('Select Image', 'take-pic'), onRequestClose: () => setOpen(false), },
+
+                    el('div', {}, imgList.map(x => {
+                        let isChecked = props.attributes.img == x ? true : false;
+                        return el('div', { style: { margin: '1%', width: '31%', display: 'inline-block' } },
+                            el('img', { style: { width: '100%' }, src: x },),
+                            el(CheckboxControl, {
+                                checked: isChecked,
+                                onChange: val => {
+                                    if (val) {
+                                        props.setAttributes({ img: x });
+                                    }
+                                }
+                            }),
+                        )
+                    }),
+                    ),
+                    el(Button, { style: { float: 'right', marginBottom: '10px', border: '1px solid rgba(0,0,0,1)' }, variant: "secondary", onClick: () => setOpen(false) }, __('Done', 'take-pic')),
+                )),
+        )
     },
     save: props => el('div', {}, el('img', { src: props.attributes.img }), el('p', null, props.attributes.title))
 });
