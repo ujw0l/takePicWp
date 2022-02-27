@@ -2,9 +2,9 @@
 Contributors: ujw0l
 Tags: block,blocks,webcam,image-upload,image-effects
 Requires at least: 4.0
-Tested up to: 5.7.2
+Tested up to: 5.9.1
 Requires PHP: 5.0
-Stable tag: 2.5.0
+Stable tag: 3.0.0
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, as well as
