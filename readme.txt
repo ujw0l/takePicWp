@@ -49,6 +49,7 @@ Note: Plugin works only on secured server (only under https:// not http://)
 == Frequently Asked Questions ==
 = How do I add webcam and gallery block? =
 In blocks area you will find Take pic camera and Take Pic Gallery view block just add them to whever you want it can be either post or widget area.
+
 = Why can't I customize it ? =
 
 Keep reviewing the plugin so I will know what people are looking for, I'm working on other features like letting user to apply filters to their image and edit them.  
