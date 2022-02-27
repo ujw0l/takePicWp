@@ -131,3 +131,28 @@ wp.blocks.registerBlockType('take-pic/take-pic-gallery-block', {
         el('p', {}, attributes.galTitle),
     )
 });
+
+
+wp.blocks.registerBlockType('take-pic/take-pic-camera-block', {
+    title: __('Take Pic Camera', 'take-pic'),
+    icon: 'camera-alt',
+    description: __("Take Pic camera block", 'take-pic'),
+    category: 'media',
+    keywords: [__('take pic camera', 'take-pic'), __('webcam', 'take-pic')],
+    example: {},
+    edit: () => { return el('a', { 'id': 'takePicButton', 'href': 'JavaScript:void(0);', title: 'Take picture with camera and upload', className: 'dashicons dashicons-camera-alt' },) },
+    save: () => { return el('a', { 'id': "takePicButton", 'href': "JavaScript:void(0);", title: "Take picture with camera and upload", onClick: "new takePic();" },) }
+
+});
+
+wp.blocks.registerBlockType('take-pic/take-pic-gallery-view-block', {
+    title: __('Take Gallery View', 'take-pic'),
+    icon: 'format-gallery',
+    description: __("Take Pic view gallery block", 'take-pic'),
+    category: 'media',
+    keywords: [__('take pic view gallery', 'take-pic')],
+    example: {},
+    edit: () => { return el('a', { 'id': 'viewUploadedImages', 'href': 'JavaScript:void(0);', title: 'View all uploaded images', className: 'dashicons dashicons-format-gallery' },) },
+    save: () => { return el('a', { 'id': "viewUploadedImages", 'href': "JavaScript:void(0);", title: "View all uploaded images", onClick: "takePic.viewUploadedImages();" },) }
+
+});
