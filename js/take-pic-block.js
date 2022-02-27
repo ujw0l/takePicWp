@@ -146,7 +146,7 @@ wp.blocks.registerBlockType('take-pic/take-pic-camera-block', {
 });
 
 wp.blocks.registerBlockType('take-pic/take-pic-gallery-view-block', {
-    title: __('Take Gallery View', 'take-pic'),
+    title: __('Take Pic Gallery View', 'take-pic'),
     icon: 'format-gallery',
     description: __("Take Pic view gallery block", 'take-pic'),
     category: 'media',
