@@ -3,7 +3,7 @@
 Plugin Name: Take Pic
 Plugin URI: https://github.com/ujw0l/takePicWp
 Description: WordPress plugin which enables user to take picture with their webcam apply effects and upload to the server
-Version: 2.5.0
+Version: 3.0.0
 Author: Ujwol Bastakoti
 text-domain : take-pic
 Author URI:http://ujw0l.github.io/
@@ -12,135 +12,9 @@ License: GPLv2
 
 
 
-class takePicWidget extends WP_Widget{
-		public function __construct() {
-			parent::__construct(
-					'takePic', // Base ID
-					'Take Pic', // Name
-					array( 'description' => __( 'This plugin enables user to take picture with their webcam and upload them', 'take-pic' ), ) // Args
-			);
-			
-			add_action( 'wp_enqueue_scripts', array($this, 'load_dashicons_front_end') );
-
-			//hook to  register widget
-			add_action( 'widgets_init', array($this,'register_takePicWidget') );
-			
-			
-		}
-
-		/**l
-         * oad dashicon
-         */
-		public function load_dashicons_front_end() {
-		    wp_enqueue_style( 'dashicons' );
-		}
 
 
-         /**
-          * Wp widget form 
-        */
-		public function form( $instance ) {
 
-		    if ( isset( $instance[ 'title' ] ) ) {
-					$title = $instance[ 'title' ];
-
-		    }
-		    else{
-					$title = __( 'Take Pic', 'take-pic' );
-		    }
-
-				?>
-      <p>
-				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-				<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-				</p>
-
-<?php
-		}
-
-
-		/**
-		 * Sanitize widget form values as they are saved.
-		 *
-		 * @see WP_Widget::update()
-		 *
-		 * @param array $new_instance Values just sent to be saved.
-		 * @param array $old_instance Previously saved values from database.
-		 *
-		 * @return array Updated safe values to be saved.
-		 */
-		public function update( $new_instance, $old_instance ) {
-		    
-		    $instance = array();
-		    $instance['title'] = strip_tags( $new_instance['title'] );
-			return $instance;
-		}
-
-
-		/**
-		 * Front-end display of widget.
-		 *
-		 * @see WP_Widget::widget()
-		 *
-		 * @param array $args     Widget arguments.
-		 * @param array $instance Saved values from database.
-		 */
-		public function widget( $args, $instance ) {
-		wp_enqueue_style( 'vanillaCtcOverlayCss', plugins_url('css/ctc_overlay_style.css',__FILE__ )); //register css;
-		wp_enqueue_style( 'takePicCss', plugins_url('css/take-pic.css',__FILE__ )); //register css;
-        wp_enqueue_script('ctcOverlayJs', plugins_url('js/ctc_overlay.js',__FILE__ ));
-        wp_enqueue_script('takePicJs', plugins_url('js/take-pic.js',__FILE__ ),array('jsCrop'));
-        wp_enqueue_script('jsCrop', plugins_url('js/js-crop.js',__FILE__ ));
-        wp_localize_script( 'takePicJs', 'my_ajax_url', admin_url( 'admin-ajax.php' ) );
-        wp_localize_script( 'takePicJs', 'takePicMessage', array(
-                                                                'mobile_browser' => __("Mobile devices do not support this feature yet",'take-pic'),
-                                                                'no_ssl' => __("You browser doesn't  support webcam feature.",'take-pic'),
-                                                                'connection_error' => __("Connection error.",'take-pic'),
-                                                                'delete_confirm' => __("Are you sure you want to delete this image?",'take-pic'),
-                                                                'delete_success' => __("Image sucessfully deleted.",'take-pic'),
-                                                                'delete_failed' => __("Could't delete image at this time.",'take-pic'),
-                                                                'profile_pic' => __("will be profile pic.",'take-pic'),
-                                                                'no_image' => __("You do not have any image to display.",'take-pic'),
-
-
-        ) );
-        
-
-			extract( $args );
-			
-			$title = apply_filters( 'widget_title', $instance['title'] );
-
-			echo $before_widget;
-			if ( ! empty( $title ) )
-				echo $before_title . $title . $after_title;
-			?>
-              <div id="takePicWidget">
-              <?php if(is_user_logged_in()):?>
-              		<a id="takePicButton" href="JavaScript:void(0);" title="Take picture with camera and upload" onclick="new takePic();"> </a>
-              		
-              		<a id="viewUploadedImages" href="JavaScript:void(0);" title="View all uploaded images" onclick="takePic.viewUploadedImages();"> </a>
-              		<?php else:?>
-              			<a id="takePicButton" class="takePicIconNotLogged" href="JavaScript:void(0);" title="Take picture with camera and upload" onclick="new takePic();"> </a>
-              		<?php endif;?>
-              </div>
-
-		<?php
-
-			echo $after_widget;
-		}
-
-
-		
-		/**
-         * function to register takePic widget
-         */
-		public function register_takePicWidget(){
-		    register_widget( "takePicWidget" );
-		}
-		
-			
-   
-}
 
 
 /** 
@@ -157,18 +31,32 @@ class takePicPlugin{
         
     }
     
+
+
     /**
      * function to register required wp action
      */
     public function allRequiredWpActions(){
         
         add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendJs' ));
+        add_action('wp_enqueue_scripts',array($this,'loadFrontEndStyle'));
         add_action('admin_menu', array($this, 'takePicAdminMenu'));
         add_action('admin_footer', array($this,'takePicRemoveUpload_javascript'));
         add_action( 'admin_enqueue_scripts', array($this,'enequeAdminJs' ));
         add_action('init', array($this,'takePicRegisterBlock'));
     }
     
+
+    /**
+     * Function to load dashicons
+     */
+
+     public function loadFrontEndStyle(){
+        wp_enqueue_style( 'dashicons' );
+        wp_enqueue_style( 'vanillaCtcOverlayCss', plugins_url('css/ctc_overlay_style.css',__FILE__ )); //register css;
+		wp_enqueue_style( 'takePicCss', plugins_url('css/take-pic.css',__FILE__ )); //register css;
+     }
+
     /**
      * function to register required ajax function
      */
@@ -440,6 +328,8 @@ class takePicPlugin{
      * function to get all uploaded 
      */
     public function ajaxGetUploadedImages(){
+
+        if(is_user_logged_in()):
         $current_user = wp_get_current_user();
         $uploadDir = wp_upload_dir();
         $userDirname = $uploadDir['basedir']. '/' . $current_user->user_login;
@@ -455,6 +345,9 @@ class takePicPlugin{
              else:
                 echo json_encode(array("noImage"));
              endif;
+            else:
+                echo json_encode(array('notLoggedIn'=>__('You need to login to view images','take-pic')));
+            endif;
         wp_die();
     }
 
@@ -523,9 +416,25 @@ public function getUserUploadedImgs(){
      public function enequeFrontendJs(){
         wp_enqueue_script('jsMasonry', plugins_url( 'js/js-masonry.js',__FILE__ ),array());
         wp_enqueue_script('takePicFrontEndJs', plugins_url( 'js/take-pic-frontend.js',__FILE__ ),array('jsMasonry'));
+        wp_enqueue_script('ctcOverlayJs', plugins_url('js/ctc_overlay.js',__FILE__ ));
+        wp_enqueue_script('takePicJs', plugins_url('js/take-pic.js',__FILE__ ),array('jsCrop'));
+        wp_enqueue_script('jsCrop', plugins_url('js/js-crop.js',__FILE__ ));
+        wp_localize_script( 'takePicJs', 'my_ajax_url', admin_url( 'admin-ajax.php' ) );
+        wp_localize_script( 'takePicJs', 'takePicMessage', array(
+                                                                'mobile_browser' => __("Mobile devices do not support this feature yet",'take-pic'),
+                                                                'no_ssl' => __("You browser doesn't  support webcam feature.",'take-pic'),
+                                                                'connection_error' => __("Connection error.",'take-pic'),
+                                                                'delete_confirm' => __("Are you sure you want to delete this image?",'take-pic'),
+                                                                'delete_success' => __("Image sucessfully deleted.",'take-pic'),
+                                                                'delete_failed' => __("Could't delete image at this time.",'take-pic'),
+                                                                'profile_pic' => __("will be profile pic.",'take-pic'),
+                                                                'no_image' => __("You do not have any image to display.",'take-pic'),
+
+
+        )) ;
 
      }
 
 }
 new takePicPlugin();
-new takePicWidget();
+

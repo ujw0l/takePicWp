@@ -2,9 +2,9 @@
 Contributors: ujw0l
 Tags: block,blocks,webcam,image-upload,image-effects
 Requires at least: 4.0
-Tested up to: 5.7.2
+Tested up to: 5.9.1
 Requires PHP: 5.0
-Stable tag: 2.5.0
+Stable tag: 3.0.0
 License: GPLv2
 
 Plugin which enables user to take picture with their webcam and upload to the server through side bar widget, as well as
@@ -47,10 +47,12 @@ Note: Plugin works only on secured server (only under https:// not http://)
 3. This will delete all the plugin files from the server without erasing  options the plugin has stored in the database.
 
 == Frequently Asked Questions ==
+= How do I add webcam and gallery block? =
+In blocks area you will find Take pic camera and Take Pic Gallery view block just add them to whever you want it can be either post or widget area.
 
 = Why can't I customize it ? =
 
-This is the version 1.0 keep reviewing the plugin so I will know what people are looking for, I'm working on other features like letting user to apply filters to their image and edit them.  
+Keep reviewing the plugin so I will know what people are looking for, I'm working on other features like letting user to apply filters to their image and edit them.  
 
 = Is this plugin mobile freindly ? =
 
@@ -71,7 +73,7 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 
 == Screenshots ==
 
-1.	Widget webcam and gallery links 
+1.  Webcam and gallery links 
 2.	Camera view with effects applied
 3.	All of the images users have uploded in CTC overlay gallery viewer 
 4.	Admin panel view of plugin
@@ -121,4 +123,8 @@ No, you have to do it manually by yourself as I don't want your user's memorable
 
  = 2.5.0 =
 * Take Pic Image gallery block added
+
+ = 3.0.0 =
+* Block for frontend webcam and gallery added
+* Legacy widget functionality removed 
 

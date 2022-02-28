@@ -585,18 +585,14 @@ class takePic {
 			if (this.status >= 200 && this.status < 400) {
 
 				if (this.response.length === 1) {
-
-
 					alert(takePicMessage.no_image);
-
+				}
+				else if (undefined != this.response.notLoggedIn) {
+					alert(this.response.notLoggedIn);
 				}
 				else {
-
 					let oldImageAlbum = document.getElementById("hiddenImageAlbum");
-
 					if (oldImageAlbum === null) {
-
-
 						takePic.createImageAlbum(this.response);
 					}
 					else {
